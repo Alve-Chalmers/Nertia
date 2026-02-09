@@ -4,4 +4,5 @@ using UnityEngine;
 public class PlayerInfo : ScriptableObject
 {
     public PlayerState State = PlayerState.BASE;
+    public Vector2 Position;
 }
