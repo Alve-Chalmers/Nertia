@@ -8,16 +8,20 @@ public class PlayerAligner : MonoBehaviour
     public bool align = true;
 
     [SerializeField]
-    float raySpacing = 0.3f;
+    float castRadius = 0.5f;
 
     [SerializeField]
-    float rayLength = 2f;
+    float castDistance = 2f;
 
     [SerializeField]
     float rotationSpeed = 10f;
 
     [SerializeField]
     float maxRotationPerSecond = 90f;
+
+    [SerializeField] LayerMask maskToHit;
+
+    [SerializeField] PlayerInfo playerInfo;
 
     void Start()
     {
@@ -30,41 +34,32 @@ public class PlayerAligner : MonoBehaviour
         {
             return;
         }
+
+        if (rb.linearVelocityX > 0)
+        {
+            playerInfo.directionX = 1;
+        }
+        else if (rb.linearVelocityX < 0)
+        {
+            playerInfo.directionX = -1;
+        }
         
-        int mask = LayerMask.GetMask("Ground");
         Vector2 down = -transform.up;
-        Vector2 right = transform.right;
+        Vector2 origin = transform.position;
         
-        // Cast rays from left, center, and right
-        Vector2 leftOrigin = (Vector2)transform.position - right * raySpacing;
-        Vector2 centerOrigin = transform.position;
-        Vector2 rightOrigin = (Vector2)transform.position + right * raySpacing;
+        RaycastHit2D hit = Physics2D.CircleCast(origin, castRadius, down, castDistance, maskToHit);
         
-        RaycastHit2D hitLeft = Physics2D.Raycast(leftOrigin, down, rayLength, mask);
-        RaycastHit2D hitCenter = Physics2D.Raycast(centerOrigin, down, rayLength, mask);
-        RaycastHit2D hitRight = Physics2D.Raycast(rightOrigin, down, rayLength, mask);
-        
-        Debug.DrawRay(leftOrigin, down * rayLength, Color.red);
-        Debug.DrawRay(centerOrigin, down * rayLength, Color.green);
-        Debug.DrawRay(rightOrigin, down * rayLength, Color.blue);
-        
-        // Average the normals from all hits
-        Vector2 avgNormal = Vector2.zero;
-        int hitCount = 0;
-        
-        if (hitLeft.collider != null) { avgNormal += hitLeft.normal; hitCount++; }
-        if (hitCenter.collider != null) { avgNormal += hitCenter.normal; hitCount++; }
-        if (hitRight.collider != null) { avgNormal += hitRight.normal; hitCount++; }
+        // Debug visualization
+        Debug.DrawRay(origin, down * castDistance, Color.green);
 
         float targetAngle;
-        if (hitCount == 0)
+        if (hit.collider == null)
         {
             targetAngle = 0f;
         }
         else
         {
-            avgNormal /= hitCount;
-            targetAngle = Vector2.SignedAngle(Vector2.up, avgNormal);
+            targetAngle = Vector2.SignedAngle(Vector2.up, hit.normal);
         }
         
         // Smoothly interpolate to target angle
