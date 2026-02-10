@@ -318,10 +318,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   align: 1
-  raySpacing: 0.3
-  rayLength: 2
+  castRadius: 0.5
+  castDistance: 2
   rotationSpeed: 10
   maxRotationPerSecond: 90
+  maskToHit:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &7194619381428211079
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,8 +353,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2214, y: 0.2214, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.55, y: 0.55, z: 0.55}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 776715892045604965}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -368,10 +371,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInfo: {fileID: 11400000, guid: 2d3b20cff99313940bbf334a7a7d1b47, type: 2}
-  checkingRange: 3
+  checkingRange: 1
+  force: 15
   maskToHit:
     serializedVersion: 2
     m_Bits: 64
+  drawDebugRays: 1
+  prb: {fileID: 5651467352645874403}
 --- !u!212 &3892468073183680090
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -475,12 +481,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInfo: {fileID: 11400000, guid: 2d3b20cff99313940bbf334a7a7d1b47, type: 2}
   prb: {fileID: 5651467352645874403}
-  force: 50
-  maxSpeed: 2
-  maxSlopeAngle: 45
-  slopeForceMultiplier: 2
+  force: 5
+  maxSpeed: 5
+  maxSlopeAngle: 60
+  slopeForceMultiplier: 20
   raySpacing: 0.3
   rayLength: 1
+  maskToHit:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!212 &3140093486477621652
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -733,7 +742,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

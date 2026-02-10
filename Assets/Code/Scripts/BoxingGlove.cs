@@ -4,13 +4,29 @@ using UnityEngine;
 public class BoxingGlove : PlayerForm
 {
     protected override PlayerState State => PlayerState.BOXING_GLOVE;
-    [SerializeField] float checkingRange;
+    [SerializeField] float checkingRange = 1;
+    [SerializeField] float force = 15;
     [SerializeField] LayerMask maskToHit;
+    [SerializeField] bool drawDebugRays;
+    [SerializeField] Rigidbody2D prb;
+
+    Vector2 dir;
 
     void OnEnable()
     {
-        Vector2 dir = DirectionToClosestWall();
-        transform.localPosition = dir;
+        base.OnEnable();
+        // dir = DirectionToClosestWall();
+        dir = (FindClosestContact() - playerInfo.Position).normalized;
+        transform.position = playerInfo.Position + dir;
+        transform.eulerAngles = Vector3.zero;
+        prb.AddForce(-dir * force, ForceMode2D.Impulse);
+    }
+
+    void Update()
+    {
+        transform.position = playerInfo.Position + dir;
+        transform.eulerAngles = Vector3.zero;
+        DrawDebugRays();
     }
 
     Vector2 DirectionToClosestWall()
@@ -45,5 +61,64 @@ public class BoxingGlove : PlayerForm
         }
         
         return closestDirection;
+    }
+
+    Vector2 FindClosestContact()
+    {
+        // 1. Get all colliders within the maximum expansion range
+        Collider2D[] hits = Physics2D.OverlapCircleAll(playerInfo.Position, checkingRange, maskToHit);
+
+        Collider2D closestCollider = null;
+        Vector2 closestPoint = Vector2.zero;
+        float shortestDistance = Mathf.Infinity;
+
+        foreach (var hitCollider in hits)
+        {
+            // 2. Find the closest point on this specific collider surface to our center
+            Vector2 pointOnSurface = hitCollider.ClosestPoint(playerInfo.Position);
+            
+            float dist = Vector2.Distance(playerInfo.Position, pointOnSurface);
+
+            if (dist < shortestDistance)
+            {
+                shortestDistance = dist;
+                closestCollider = hitCollider;
+                closestPoint = pointOnSurface;
+            }
+        }
+
+        if (closestCollider != null)
+        {
+            Debug.Log($"Hit {closestCollider.name} at point {closestPoint} (Distance: {shortestDistance})");
+            Debug.DrawLine(playerInfo.Position, closestPoint, Color.red, 1f);
+        }
+
+        return closestPoint;
+    }
+
+    void DrawDebugRays()
+    {
+        if (!drawDebugRays || playerInfo == null) return;
+
+        Vector2 origin = playerInfo.Position;
+        Debug.DrawRay(origin, Vector2.up * checkingRange, Color.red);
+        Debug.DrawRay(origin, Vector2.down * checkingRange, Color.green);
+        Debug.DrawRay(origin, Vector2.left * checkingRange, Color.blue);
+        Debug.DrawRay(origin, Vector2.right * checkingRange, Color.yellow);
+    }
+
+    void OnDrawGizmos()
+    {
+        if (!drawDebugRays) return;
+
+        Vector2 origin = playerInfo != null ? playerInfo.Position : (Vector2)transform.position;
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(origin, Vector2.up * checkingRange);
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay(origin, Vector2.down * checkingRange);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawRay(origin, Vector2.left * checkingRange);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawRay(origin, Vector2.right * checkingRange);
     }
 }

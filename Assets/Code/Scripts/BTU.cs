@@ -3,12 +3,13 @@ using UnityEngine;
 public class BTU : PlayerForm
 {
     [SerializeField] Rigidbody2D prb;
-    [SerializeField] float force;
+    [SerializeField] float force = 5;
     [SerializeField] float maxSpeed;
     [SerializeField] float maxSlopeAngle = 45f;
     [SerializeField] float slopeForceMultiplier = 2f;
     [SerializeField] float raySpacing = 0.3f;
     [SerializeField] float rayLength = 1f;
+    [SerializeField] LayerMask maskToHit;
     int dir = -1;
 
     protected override PlayerState State => PlayerState.BTU;
@@ -21,7 +22,6 @@ public class BTU : PlayerForm
 
     void Update()
     {
-        int mask = LayerMask.GetMask("Ground");
         Vector2 down = -transform.up;
         Vector2 right = transform.right;
         
@@ -30,9 +30,9 @@ public class BTU : PlayerForm
         Vector2 centerOrigin = transform.position;
         Vector2 rightOrigin = (Vector2)transform.position + right * raySpacing;
         
-        RaycastHit2D hitLeft = Physics2D.Raycast(leftOrigin, down, rayLength, mask);
-        RaycastHit2D hitCenter = Physics2D.Raycast(centerOrigin, down, rayLength, mask);
-        RaycastHit2D hitRight = Physics2D.Raycast(rightOrigin, down, rayLength, mask);
+        RaycastHit2D hitLeft = Physics2D.Raycast(leftOrigin, down, rayLength, maskToHit);
+        RaycastHit2D hitCenter = Physics2D.Raycast(centerOrigin, down, rayLength, maskToHit);
+        RaycastHit2D hitRight = Physics2D.Raycast(rightOrigin, down, rayLength, maskToHit);
         
         Debug.DrawRay(leftOrigin, down * rayLength, Color.red);
         Debug.DrawRay(centerOrigin, down * rayLength, Color.green);
@@ -64,7 +64,7 @@ public class BTU : PlayerForm
 
         if (prb.linearVelocity.magnitude >= maxSpeed)
         {
-            prb.AddForce(-prb.linearVelocity);
+            prb.AddForce(-prb.linearVelocity*0.5f);
             return;
         }
 
