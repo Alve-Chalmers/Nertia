@@ -19,7 +19,7 @@ public class BTU : PlayerForm
         dir = -dir;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         int mask = LayerMask.GetMask("Ground");
         Vector2 down = -transform.up;
