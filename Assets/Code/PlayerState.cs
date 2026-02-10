@@ -3,5 +3,6 @@ public enum PlayerState
     BASE,
     BTU,
     WHEEL,
-    BOXING_GLOVE
+    BOXING_GLOVE,
+    GLIDER,
 }

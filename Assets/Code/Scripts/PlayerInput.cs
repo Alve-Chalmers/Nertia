@@ -8,6 +8,7 @@ public class PlayerInput : MonoBehaviour
     InputAction btuAction;
     InputAction wheelAction;
     InputAction boxingGloveAction;
+    InputAction gliderAction;
 
     [SerializeField]
     GameObject BTU;
@@ -15,12 +16,15 @@ public class PlayerInput : MonoBehaviour
     GameObject wheel;
     [SerializeField]
     GameObject boxingGlove;
+    [SerializeField]
+    GameObject glider;
 
     void OnEnable()
     {
         btuAction = InputSystem.actions.FindAction("BTU");
         wheelAction = InputSystem.actions.FindAction("Wheel");
         boxingGloveAction = InputSystem.actions.FindAction("BoxingGlove");
+        gliderAction = InputSystem.actions.FindAction("Glider");
 
         btuAction.performed += OnBTUPerformed;
         btuAction.canceled += OnBTUCanceled;
@@ -28,6 +32,8 @@ public class PlayerInput : MonoBehaviour
         wheelAction.canceled += OnWheelCanceled;
         boxingGloveAction.performed += OnBoxingGlovePerformed;
         boxingGloveAction.canceled += OnBoxingGloveCanceled;
+        gliderAction.performed += OnGliderPerformed;
+        gliderAction.canceled += OnGliderCanceled;
     }
 
     void OnDisable()
@@ -38,6 +44,8 @@ public class PlayerInput : MonoBehaviour
         wheelAction.canceled -= OnWheelCanceled;
         boxingGloveAction.performed -= OnBoxingGlovePerformed;
         boxingGloveAction.canceled -= OnBoxingGloveCanceled;
+        gliderAction.performed -= OnGliderPerformed;
+        gliderAction.canceled -= OnGliderCanceled;
     }
 
     void OnBTUPerformed(InputAction.CallbackContext context)
@@ -55,6 +63,11 @@ public class PlayerInput : MonoBehaviour
         DisableAll();
         boxingGlove.SetActive(true);
     }
+    void OnGliderPerformed(InputAction.CallbackContext context)
+    {
+        DisableAll();
+        glider.SetActive(true);
+    }
 
     void OnBTUCanceled(InputAction.CallbackContext context)
     {
@@ -68,11 +81,16 @@ public class PlayerInput : MonoBehaviour
     {
         boxingGlove.SetActive(false);
     }
+    void OnGliderCanceled(InputAction.CallbackContext context)
+    {
+        glider.SetActive(false);
+    }
 
     void DisableAll()
     {
         BTU.SetActive(false);
         wheel.SetActive(false);
         boxingGlove.SetActive(false);
+        glider.SetActive(false);
     }
 }

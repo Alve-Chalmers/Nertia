@@ -21,6 +21,8 @@ public class PlayerAligner : MonoBehaviour
 
     [SerializeField] LayerMask maskToHit;
 
+    [SerializeField] PlayerInfo playerInfo;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -31,6 +33,15 @@ public class PlayerAligner : MonoBehaviour
         if (!align)
         {
             return;
+        }
+
+        if (rb.linearVelocityX > 0)
+        {
+            playerInfo.directionX = 1;
+        }
+        else if (rb.linearVelocityX < 0)
+        {
+            playerInfo.directionX = -1;
         }
         
         Vector2 down = -transform.up;

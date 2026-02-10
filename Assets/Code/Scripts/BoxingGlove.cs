@@ -12,11 +12,15 @@ public class BoxingGlove : PlayerForm
 
     Vector2 dir;
 
-    void OnEnable()
+    protected override void OnEnable()
     {
         base.OnEnable();
-        // dir = DirectionToClosestWall();
-        dir = (FindClosestContact() - playerInfo.Position).normalized;
+        Vector2? closestPoint = FindClosestContact();
+        if (closestPoint == null) {
+            gameObject.SetActive(false);
+            return;
+        }
+        dir = (closestPoint.Value - playerInfo.Position).normalized;
         transform.position = playerInfo.Position + dir;
         transform.eulerAngles = Vector3.zero;
         prb.AddForce(-dir * force, ForceMode2D.Impulse);
@@ -63,13 +67,13 @@ public class BoxingGlove : PlayerForm
         return closestDirection;
     }
 
-    Vector2 FindClosestContact()
+    Vector2? FindClosestContact()
     {
         // 1. Get all colliders within the maximum expansion range
         Collider2D[] hits = Physics2D.OverlapCircleAll(playerInfo.Position, checkingRange, maskToHit);
 
         Collider2D closestCollider = null;
-        Vector2 closestPoint = Vector2.zero;
+        Vector2? closestPoint = null;
         float shortestDistance = Mathf.Infinity;
 
         foreach (var hitCollider in hits)
@@ -85,12 +89,6 @@ public class BoxingGlove : PlayerForm
                 closestCollider = hitCollider;
                 closestPoint = pointOnSurface;
             }
-        }
-
-        if (closestCollider != null)
-        {
-            Debug.Log($"Hit {closestCollider.name} at point {closestPoint} (Distance: {shortestDistance})");
-            Debug.DrawLine(playerInfo.Position, closestPoint, Color.red, 1f);
         }
 
         return closestPoint;
