@@ -5,4 +5,5 @@ public enum PlayerState
     WHEEL,
     BOXING_GLOVE,
     GLIDER,
+    DYING,
 }
