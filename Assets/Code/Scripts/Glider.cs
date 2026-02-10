@@ -13,7 +13,6 @@ public class Glider : PlayerForm
     protected override void OnEnable()
     {
         base.OnEnable();
-        playerInfo.directionX = (int)(prb.linearVelocityX / Math.Abs(prb.linearVelocityX));
         prb.AddForce(glideDirectionForce * playerInfo.directionX * Vector2.right, ForceMode2D.Impulse);
     }
 
