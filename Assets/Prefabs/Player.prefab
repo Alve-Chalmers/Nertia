@@ -424,7 +424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   align: 1
-  castRadius: 0.5
+  castRadius: 2
   castDistance: 2
   rotationSpeed: 10
   maxRotationPerSecond: 90
@@ -556,7 +556,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &133267006942699061
 Transform:
   m_ObjectHideFlags: 0
@@ -641,6 +641,9 @@ MonoBehaviour:
   slopeForceMultiplier: 20
   raySpacing: 0.3
   rayLength: 1
+  maskToHit:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!212 &3140093486477621652
 SpriteRenderer:
   m_ObjectHideFlags: 0
