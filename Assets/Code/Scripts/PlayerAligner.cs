@@ -9,9 +9,6 @@ public class PlayerAligner : MonoBehaviour
     public bool align = true;
 
     [SerializeField]
-    float castRadius = 0.5f;
-
-    [SerializeField]
     float castDistance = 2f;
 
     [SerializeField]
@@ -19,6 +16,9 @@ public class PlayerAligner : MonoBehaviour
 
     [SerializeField]
     float maxRotationPerSecond = 90f;
+
+    [SerializeField]
+    float maxAlignmentRot;
 
     [SerializeField] LayerMask maskToHit;
 
@@ -36,13 +36,13 @@ public class PlayerAligner : MonoBehaviour
             return;
         }
 
-        if (rb.linearVelocityX > 0.1f)
+        if (rb.linearVelocityX > 1f)
         {
-            playerInfo.directionX = 1;
+            playerInfo.DirectionX = 1;
         }
-        else if (rb.linearVelocityX < 0.1f)
+        else if (rb.linearVelocityX < 1f)
         {
-            playerInfo.directionX = -1;
+            playerInfo.DirectionX = -1;
         }
         
 
@@ -63,12 +63,16 @@ public class PlayerAligner : MonoBehaviour
             Debug.DrawLine(playerInfo.Position, playerInfo.Position + dir * castDistance, Color.black);
             normalsSum += hit.normal;
         }
+        playerInfo.GroundNormal = Vector2.zero;
         if (hits != 0)
         {
             Vector2 averageNormal = normalsSum / hits;
             Debug.DrawLine(playerInfo.Position, playerInfo.Position + averageNormal * castDistance, Color.yellow);
             targetAngle = Vector2.SignedAngle(Vector2.up, averageNormal);
+            playerInfo.GroundNormal = averageNormal;
         }
+
+        targetAngle = Mathf.Clamp(targetAngle, -maxAlignmentRot, maxAlignmentRot);
         
         // Smoothly interpolate to target angle
         float currentAngle = rb.rotation;

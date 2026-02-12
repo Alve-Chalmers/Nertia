@@ -5,5 +5,7 @@ public class PlayerInfo : ScriptableObject
 {
     [System.NonSerialized] public PlayerState State = PlayerState.BASE;
     [System.NonSerialized] public Vector2 Position;
-    [System.NonSerialized] public int directionX; // 1 is right, -1 is left
+    [System.NonSerialized] public int DirectionX; // 1 is right, -1 is left
+    [System.NonSerialized] public Vector2 GroundNormal;
+    public bool IsGrounded => GroundNormal.magnitude != 0;
 }

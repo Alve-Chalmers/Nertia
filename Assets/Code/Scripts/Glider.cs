@@ -12,7 +12,9 @@ public class Glider : PlayerForm
     protected override void OnEnable()
     {
         base.OnEnable();
-        prb.AddForce(glideDirectionForce * playerInfo.directionX * Vector2.right, ForceMode2D.Impulse);
+        if (!playerInfo.IsGrounded) {
+            prb.AddForce(glideDirectionForce * playerInfo.DirectionX * Vector2.right, ForceMode2D.Impulse);
+        }
     }
 
     void FixedUpdate()

@@ -4,12 +4,11 @@ public class BTU : PlayerForm
 {
     [SerializeField] Rigidbody2D prb;
     [SerializeField] float force;
-    [SerializeField] float maxSpeed;
+    [SerializeField] float targetSpeed = 5f;
     [SerializeField] float maxSlopeAngle = 45f;
-    [SerializeField] float slopeForceMultiplier = 2f;
-    [SerializeField] float raySpacing = 0.3f;
-    [SerializeField] float rayLength = 1f;
-    [SerializeField] LayerMask maskToHit;
+    float correctingStartDirForce = 10f;
+    float minLinXVelForCorrectingForce = 1f;
+    [SerializeField] SpriteRenderer DebugDirectionSprite;
     int dir = -1;
 
     protected override PlayerState State => PlayerState.BTU;
@@ -18,63 +17,58 @@ public class BTU : PlayerForm
     {
         base.OnEnable();
         dir = -dir;
+
+        bool goingUpHill = Mathf.Sign(playerInfo.GroundNormal.x) != dir;
+        bool switchingDirection = Mathf.Sign(prb.linearVelocityX) != dir;
+
+        Vector2 groundDir = Vector3.Cross(playerInfo.GroundNormal, Vector3.forward);
+        float groundVelMag = Vector2.Dot(prb.linearVelocity, groundDir * dir);
+
+        if (Mathf.Abs(groundVelMag) > minLinXVelForCorrectingForce &&
+            (switchingDirection || goingUpHill)
+            )
+        {
+            prb.AddForce(groundDir * dir * correctingStartDirForce, ForceMode2D.Impulse);
+        }
     }
 
     void FixedUpdate()
     {
-        Vector2 down = -transform.up;
-        Vector2 right = transform.right;
-        
-        // Cast multiple rays for better terrain detection
-        Vector2 leftOrigin = (Vector2)transform.position - right * raySpacing;
-        Vector2 centerOrigin = transform.position;
-        Vector2 rightOrigin = (Vector2)transform.position + right * raySpacing;
-        
-        RaycastHit2D hitLeft = Physics2D.Raycast(leftOrigin, down, rayLength, maskToHit);
-        RaycastHit2D hitCenter = Physics2D.Raycast(centerOrigin, down, rayLength, maskToHit);
-        RaycastHit2D hitRight = Physics2D.Raycast(rightOrigin, down, rayLength, maskToHit);
-        
-        Debug.DrawRay(leftOrigin, down * rayLength, Color.red);
-        Debug.DrawRay(centerOrigin, down * rayLength, Color.green);
-        Debug.DrawRay(rightOrigin, down * rayLength, Color.blue);
-        
-        // Average normals from all hits
-        Vector2 avgNormal = Vector2.zero;
-        int hitCount = 0;
-        
-        if (hitLeft.collider != null) { avgNormal += hitLeft.normal; hitCount++; }
-        if (hitCenter.collider != null) { avgNormal += hitCenter.normal; hitCount++; }
-        if (hitRight.collider != null) { avgNormal += hitRight.normal; hitCount++; }
-        
-        if (hitCount == 0)
-        {
-            return;
-        }
-        
-        avgNormal /= hitCount;
+        DebugDirectionSprite.flipX = dir == -1;
 
-        // Calculate slope angle from averaged ground normal
-        float slopeAngle = Vector2.Angle(Vector2.up, avgNormal);
-        
-        // Don't move if slope is too steep
-        if (slopeAngle > maxSlopeAngle)
+        if (!playerInfo.IsGrounded)
         {
             return;
         }
 
-        if (prb.linearVelocity.magnitude >= maxSpeed)
+        Vector2 groundDir = Vector3.Cross(playerInfo.GroundNormal, Vector3.forward);
+        float slopeAngle = Vector2.Angle(Vector2.up, playerInfo.GroundNormal);
+
+        bool goingUpHill = Mathf.Sign(playerInfo.GroundNormal.x) != dir;
+        // if (slopeAngle > maxSlopeAngle && goingUpHill)
+        // {
+        //     return;
+        // }
+
+        if (prb.linearVelocity.magnitude >= targetSpeed)
         {
-            prb.AddForce(-prb.linearVelocity);
+            prb.AddForce(-prb.linearVelocity * 3f);
             return;
         }
 
-        Vector2 groundDir = Vector3.Cross(avgNormal, Vector3.forward);
-        Debug.DrawRay(transform.position, groundDir * 2f, Color.yellow);
         Debug.DrawRay(transform.position, prb.linearVelocity, Color.cyan);
 
-        // Increase force on steeper slopes to counteract gravity
-        float slopeMultiplier = 1f + (slopeAngle / maxSlopeAngle) * (slopeForceMultiplier - 1f);
-        
-        prb.AddForce(groundDir * force * dir * slopeMultiplier);
+        float multiplier = Mathf.Pow(targetSpeed - prb.linearVelocity.magnitude, 2);
+
+        // Gradually reduce force as slope approaches maxSlopeAngle
+        float slopeReductionStartAngle = maxSlopeAngle - 20f; // Start reducing force at this angle
+        if (goingUpHill && slopeAngle > slopeReductionStartAngle)
+        {
+            float t = Mathf.InverseLerp(slopeReductionStartAngle, maxSlopeAngle, slopeAngle);
+            float slopeness = Mathf.Lerp(1, 0, t);
+            multiplier *= slopeness;
+        }
+
+        prb.AddForce(groundDir * force * dir * multiplier);
     }
 }
