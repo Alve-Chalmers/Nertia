@@ -1,9 +1,9 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BoxingGlove : PlayerForm
+public class BoxingGlove : PlayerAbilityScript
 {
-    protected override PlayerState State => PlayerState.BOXING_GLOVE;
+    protected override PlayerAbilityType State => PlayerAbilityType.BOXING_GLOVE;
     [SerializeField] float checkingRange = 1;
     [SerializeField] float force = 15;
     [SerializeField] LayerMask maskToHit;

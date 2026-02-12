@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-public class Glider : PlayerForm
+public class Glider : PlayerAbilityScript
 {
-    protected override PlayerState State => PlayerState.GLIDER;
+    protected override PlayerAbilityType State => PlayerAbilityType.GLIDER;
     [SerializeField] float glideUpForce = 20f;
     [SerializeField] float glideDirectionForce = 10f;
     [SerializeField] Rigidbody2D prb;

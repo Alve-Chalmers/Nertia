@@ -1,9 +1,9 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlayerInfo", menuName = "ScriptableObjects/PlayerInfo")]
+[CreateAssetMenu(fileName = "PlayerInfo", menuName = "ScriptableObjects/Data/PlayerInfo")]
 public class PlayerInfo : ScriptableObject
 {
-    [System.NonSerialized] public PlayerState State = PlayerState.BASE;
+    [System.NonSerialized] public PlayerAbilityType State = PlayerAbilityType.BASE;
     [System.NonSerialized] public Vector2 Position;
     [System.NonSerialized] public int DirectionX; // 1 is right, -1 is left
     [System.NonSerialized] public Vector2 GroundNormal;

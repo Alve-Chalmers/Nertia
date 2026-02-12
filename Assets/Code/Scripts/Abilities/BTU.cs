@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BTU : PlayerForm
+public class BTU : PlayerAbilityScript
 {
     [SerializeField] Rigidbody2D prb;
     [SerializeField] float force;
@@ -11,7 +11,7 @@ public class BTU : PlayerForm
     [SerializeField] SpriteRenderer DebugDirectionSprite;
     int dir = -1;
 
-    protected override PlayerState State => PlayerState.BTU;
+    protected override PlayerAbilityType State => PlayerAbilityType.BTU;
 
     protected override void OnEnable()
     {

@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class Dying : PlayerForm
+public class Dying : PlayerAbilityScript
 {
     public GameObject player;
     public Transform respawnPoint;
-    protected override PlayerState State => PlayerState.DYING;
+    protected override PlayerAbilityType State => PlayerAbilityType.DYING;
 
     protected override void OnEnable()
     {

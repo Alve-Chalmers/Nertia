@@ -69,6 +69,16 @@ public class SOEventVector3Editor : Editor
     }
 }
 
+[CustomEditor(typeof(SOEventPlayerAbilityType))]
+public class SOEventPlayerAbilityTypeEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+        SOEventEditorHelper.DrawRaiseButton<SOEventPlayerAbilityType, PlayerAbilityType>((SOEventPlayerAbilityType)target);
+    }
+}
+
 public static class SOEventEditorHelper
 {
     public static void DrawRaiseButton<TEvent, TValue>(TEvent soEvent) where TEvent : SOEvent<TValue>
