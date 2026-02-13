@@ -10,6 +10,7 @@ public class BTU : PlayerAbilityScript
     float minLinXVelForCorrectingForce = 1f;
     [SerializeField] SpriteRenderer DebugDirectionSprite;
     int dir = -1;
+    [SerializeField] LayerMask ground;
 
     protected override PlayerAbilityType State => PlayerAbilityType.BTU;
 
@@ -18,18 +19,6 @@ public class BTU : PlayerAbilityScript
         base.OnEnable();
         dir = -dir;
 
-        bool goingUpHill = Mathf.Sign(playerInfo.GroundNormal.x) != dir;
-        bool switchingDirection = Mathf.Sign(prb.linearVelocityX) != dir;
-
-        Vector2 groundDir = Vector3.Cross(playerInfo.GroundNormal, Vector3.forward);
-        float groundVelMag = Vector2.Dot(prb.linearVelocity, groundDir * dir);
-
-        if (Mathf.Abs(groundVelMag) > minLinXVelForCorrectingForce &&
-            (switchingDirection || goingUpHill)
-            )
-        {
-            prb.AddForce(groundDir * dir * correctingStartDirForce, ForceMode2D.Impulse);
-        }
     }
 
     void FixedUpdate()

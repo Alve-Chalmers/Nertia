@@ -18,12 +18,11 @@ public class PlayerAbilityInputListener : MonoBehaviour
     private List<AbilityMapping> abilityMappings = new();
 
     private Dictionary<PlayerAbilityType, GameObject> abilityToObj = new();
- 
-    void Awake()
-    {
-        useAbility.Subscribe(OnUse);
-        cancelAbility.Subscribe(OnCancel);
 
+
+    void OnEnable()
+    {
+        abilityToObj.Clear();
         foreach (var mapping in abilityMappings)
         {
             if (!abilityToObj.ContainsKey(mapping.type))
@@ -31,6 +30,15 @@ public class PlayerAbilityInputListener : MonoBehaviour
                 abilityToObj.Add(mapping.type, mapping.obj);
             }
         }
+
+        useAbility.Subscribe(OnUse);
+        cancelAbility.Subscribe(OnCancel);
+    }
+
+    void OnDisable()
+    {
+        useAbility.Unsubscribe(OnUse);
+        cancelAbility.Unsubscribe(OnCancel);
     }
 
     void OnUse(PlayerAbilityType ability)
