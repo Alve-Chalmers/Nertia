@@ -13,6 +13,6 @@ public class PlayerDebugEyes : MonoBehaviour
 
     void Update()
     {
-        transform.localPosition = new Vector2(startX * playerInfo.directionX, transform.localPosition.y);
+        transform.localPosition = new Vector2(startX * playerInfo.DirectionX, transform.localPosition.y);
     }
 }

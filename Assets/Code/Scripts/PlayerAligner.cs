@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerAligner : MonoBehaviour
@@ -8,9 +9,6 @@ public class PlayerAligner : MonoBehaviour
     public bool align = true;
 
     [SerializeField]
-    float castRadius = 0.5f;
-
-    [SerializeField]
     float castDistance = 2f;
 
     [SerializeField]
@@ -18,6 +16,9 @@ public class PlayerAligner : MonoBehaviour
 
     [SerializeField]
     float maxRotationPerSecond = 90f;
+
+    [SerializeField]
+    float maxAlignmentRot;
 
     [SerializeField] LayerMask maskToHit;
 
@@ -35,32 +36,43 @@ public class PlayerAligner : MonoBehaviour
             return;
         }
 
-        if (rb.linearVelocityX > 0)
+        if (rb.linearVelocityX > 1f)
         {
-            playerInfo.directionX = 1;
+            playerInfo.DirectionX = 1;
         }
-        else if (rb.linearVelocityX < 0)
+        else if (rb.linearVelocityX < 1f)
         {
-            playerInfo.directionX = -1;
+            playerInfo.DirectionX = -1;
         }
         
-        Vector2 down = -transform.up;
-        Vector2 origin = transform.position;
-        
-        RaycastHit2D hit = Physics2D.CircleCast(origin, castRadius, down, castDistance, maskToHit);
-        
-        // Debug visualization
-        Debug.DrawRay(origin, down * castDistance, Color.green);
 
-        float targetAngle;
-        if (hit.collider == null)
+        Vector2 normalsSum = Vector2.zero;
+        float targetAngle = 0;
+        int hits = 0;
+        const int rayAmount = 30;
+        for (int i = 0; i < rayAmount; i++)
         {
-            targetAngle = 0f;
+            float angle = Mathf.Lerp(-180, 0, (float)i / rayAmount) * Mathf.Deg2Rad;
+            Vector2 dir = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+            RaycastHit2D hit = Physics2D.Raycast(playerInfo.Position, dir, castDistance, maskToHit);
+            if (hit.collider == null)
+            {
+                continue;
+            }
+            hits += 1;
+            Debug.DrawLine(playerInfo.Position, playerInfo.Position + dir * castDistance, Color.black);
+            normalsSum += hit.normal;
         }
-        else
+        playerInfo.GroundNormal = Vector2.zero;
+        if (hits != 0)
         {
-            targetAngle = Vector2.SignedAngle(Vector2.up, hit.normal);
+            Vector2 averageNormal = normalsSum / hits;
+            Debug.DrawLine(playerInfo.Position, playerInfo.Position + averageNormal * castDistance, Color.yellow);
+            targetAngle = Vector2.SignedAngle(Vector2.up, averageNormal);
+            playerInfo.GroundNormal = averageNormal;
         }
+
+        targetAngle = Mathf.Clamp(targetAngle, -maxAlignmentRot, maxAlignmentRot);
         
         // Smoothly interpolate to target angle
         float currentAngle = rb.rotation;
@@ -74,3 +86,6 @@ public class PlayerAligner : MonoBehaviour
         rb.MoveRotation(currentAngle + angleDiff);
     }
 }
+
+
+

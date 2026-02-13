@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class Wheel : PlayerForm
+public class Wheel : PlayerAbilityScript
 {
     [SerializeField]
     Rigidbody2D prb;
 
-    protected override PlayerState State => PlayerState.WHEEL;
+    protected override PlayerAbilityType State => PlayerAbilityType.WHEEL;
 
     protected override void OnEnable()
     {

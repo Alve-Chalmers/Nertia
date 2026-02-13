@@ -1,8 +1,9 @@
-public enum PlayerState
+public enum PlayerAbilityType
 {
     BASE,
     BTU,
     WHEEL,
     BOXING_GLOVE,
     GLIDER,
+    DYING,
 }

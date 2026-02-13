@@ -1,11 +1,10 @@
 using UnityEngine;
 
-abstract public class PlayerForm : MonoBehaviour
+abstract public class PlayerAbilityScript : MonoBehaviour
 {
     [SerializeField]
     protected PlayerInfo playerInfo;
-    
-    protected abstract PlayerState State { get; }
+    protected abstract PlayerAbilityType State { get; }
     
     protected virtual void OnEnable()
     {

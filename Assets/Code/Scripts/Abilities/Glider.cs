@@ -1,10 +1,9 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class Glider : PlayerForm
+public class Glider : PlayerAbilityScript
 {
-    protected override PlayerState State => PlayerState.GLIDER;
+    protected override PlayerAbilityType State => PlayerAbilityType.GLIDER;
     [SerializeField] float glideUpForce = 20f;
     [SerializeField] float glideDirectionForce = 10f;
     [SerializeField] Rigidbody2D prb;
@@ -13,8 +12,9 @@ public class Glider : PlayerForm
     protected override void OnEnable()
     {
         base.OnEnable();
-        playerInfo.directionX = (int)(prb.linearVelocityX / Math.Abs(prb.linearVelocityX));
-        prb.AddForce(glideDirectionForce * playerInfo.directionX * Vector2.right, ForceMode2D.Impulse);
+        if (!playerInfo.IsGrounded) {
+            prb.AddForce(glideDirectionForce * playerInfo.DirectionX * Vector2.right, ForceMode2D.Impulse);
+        }
     }
 
     void FixedUpdate()
