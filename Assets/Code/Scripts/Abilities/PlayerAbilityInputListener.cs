@@ -44,7 +44,16 @@ public class PlayerAbilityInputListener : MonoBehaviour
     void OnUse(PlayerAbilityType ability)
     {
         if (abilityToObj.ContainsKey(ability))
+        {
             abilityToObj[ability].SetActive(true);
+            foreach (var a in abilityToObj)
+            {
+                if (a.Key != ability)
+                {
+                    a.Value.SetActive(false);
+                }
+            }
+        }
     }
 
     void OnCancel(PlayerAbilityType ability)
