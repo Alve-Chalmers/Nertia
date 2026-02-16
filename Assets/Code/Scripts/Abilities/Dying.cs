@@ -1,9 +1,8 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Dying : PlayerAbilityScript
 {
-    public GameObject player;
-    public Transform respawnPoint;
     protected override PlayerAbilityType State => PlayerAbilityType.DYING;
 
     protected override void OnEnable()
@@ -14,6 +13,6 @@ public class Dying : PlayerAbilityScript
 
     void Die()
     {
-        player.transform.position = respawnPoint.position;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
