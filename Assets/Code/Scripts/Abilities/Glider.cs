@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Glider : PlayerAbilityScript
 {
-    protected override PlayerAbilityType State => PlayerAbilityType.GLIDER;
+    protected override PlayerAbilityType Ability => PlayerAbilityType.GLIDER;
     [SerializeField] float glideUpForce = 20f;
     [SerializeField] float glideDirectionForce = 10f;
     [SerializeField] Rigidbody2D prb;

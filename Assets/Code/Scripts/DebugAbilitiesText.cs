@@ -16,7 +16,7 @@ public class DebugAbilitiesText : MonoBehaviour
     void Start()
     {
         t.text = "";
-        foreach (var a in unlockedAbilities.Unlocked)
+        foreach (var a in unlockedAbilities.Abilities)
         {
             t.text += a.ToString() + "\n";
         }
@@ -25,7 +25,7 @@ public class DebugAbilitiesText : MonoBehaviour
     void Update()
     {
         t.text = "";
-        foreach (var a in unlockedAbilities.Unlocked)
+        foreach (var a in unlockedAbilities.Abilities)
         {
             t.text += a.ToString() + "\n";
         }

@@ -433,6 +433,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useAbility: {fileID: 11400000, guid: 9796c284629acfe4799c019cc9daa347, type: 2}
   cancelAbility: {fileID: 11400000, guid: fe89c0e943f6c674faf3db27bcbecf41, type: 2}
+  unlockedAbilities: {fileID: 11400000, guid: 32305d4e646ade448a1dff0bdd83f210, type: 2}
 --- !u!50 &5651467352645874403
 Rigidbody2D:
   serializedVersion: 5
@@ -532,15 +533,15 @@ MonoBehaviour:
   useAbility: {fileID: 11400000, guid: 9796c284629acfe4799c019cc9daa347, type: 2}
   cancelAbility: {fileID: 11400000, guid: fe89c0e943f6c674faf3db27bcbecf41, type: 2}
   abilityMappings:
-  - type: 1
+  - type: 0
     obj: {fileID: 7504789134174581496}
-  - type: 2
+  - type: 1
     obj: {fileID: 8175177755449590662}
-  - type: 3
+  - type: 2
     obj: {fileID: 7194619381428211079}
-  - type: 4
+  - type: 3
     obj: {fileID: 9108313235526676316}
-  - type: 5
+  - type: 4
     obj: {fileID: 7265151503065775458}
 --- !u!1 &7194619381428211079
 GameObject:
@@ -695,8 +696,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInfo: {fileID: 11400000, guid: 2d3b20cff99313940bbf334a7a7d1b47, type: 2}
-  player: {fileID: 6534390457413908721}
-  respawnPoint: {fileID: 0}
 --- !u!1 &7504789134174581496
 GameObject:
   m_ObjectHideFlags: 0

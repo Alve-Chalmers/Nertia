@@ -4,18 +4,24 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "UnlockedAbilities", menuName = "ScriptableObjects/Data/UnlockedAbilities")]
 public class UnlockedAbilities : ScriptableObject
 {
-    // TODO: should not be hard coded like this.
-    public List<PlayerAbilityType> Unlocked => new List<PlayerAbilityType>{
-        PlayerAbilityType.BASE,
-        PlayerAbilityType.DYING,
-        PlayerAbilityType.BTU,
-        PlayerAbilityType.WHEEL,
-        PlayerAbilityType.BOXING_GLOVE,
-        PlayerAbilityType.GLIDER,
-    };
+    [SerializeField] StartingAbilities startingAbilities;
+
+    private HashSet<PlayerAbilityType> _unlockedAbilities = null;
+
+    public HashSet<PlayerAbilityType> Abilities
+    {
+        get
+        {
+            if (_unlockedAbilities == null)
+            {
+                _unlockedAbilities = new HashSet<PlayerAbilityType>(startingAbilities.startingAbilities);
+            }
+            return _unlockedAbilities;
+        }
+    }
 
     public void UnlockAbility(PlayerAbilityType a)
     {
-        Debug.Log("Unlocked " + a.ToString());
+        _unlockedAbilities.Add(a);
     }
 }

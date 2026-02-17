@@ -5,7 +5,7 @@ public class Wheel : PlayerAbilityScript
     [SerializeField]
     Rigidbody2D prb;
 
-    protected override PlayerAbilityType State => PlayerAbilityType.WHEEL;
+    protected override PlayerAbilityType Ability => PlayerAbilityType.WHEEL;
 
     protected override void OnEnable()
     {

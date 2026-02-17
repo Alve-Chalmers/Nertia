@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BoxingGlove : PlayerAbilityScript
 {
-    protected override PlayerAbilityType State => PlayerAbilityType.BOXING_GLOVE;
+    protected override PlayerAbilityType Ability => PlayerAbilityType.BOXING_GLOVE;
     [SerializeField] float checkingRange = 1;
     [SerializeField] float force = 15;
     [SerializeField] LayerMask maskToHit;

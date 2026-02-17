@@ -6,19 +6,17 @@ public class BTU : PlayerAbilityScript
     [SerializeField] float force;
     [SerializeField] float targetSpeed = 5f;
     [SerializeField] float maxSlopeAngle = 45f;
-    float correctingStartDirForce = 10f;
-    float minLinXVelForCorrectingForce = 1f;
     [SerializeField] SpriteRenderer DebugDirectionSprite;
-    int dir = -1;
     [SerializeField] LayerMask ground;
 
-    protected override PlayerAbilityType State => PlayerAbilityType.BTU;
+    protected override PlayerAbilityType Ability => PlayerAbilityType.BTU;
+
+    int dir = -1;
 
     protected override void OnEnable()
     {
         base.OnEnable();
         dir = -dir;
-
     }
 
     void FixedUpdate()

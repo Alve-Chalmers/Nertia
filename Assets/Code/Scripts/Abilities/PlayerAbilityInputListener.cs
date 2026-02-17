@@ -46,12 +46,12 @@ public class PlayerAbilityInputListener : MonoBehaviour
         if (abilityToObj.ContainsKey(ability))
         {
             abilityToObj[ability].SetActive(true);
-            foreach (var a in abilityToObj)
+        }
+        foreach (var a in abilityToObj)
+        {
+            if (a.Key != ability)
             {
-                if (a.Key != ability)
-                {
-                    a.Value.SetActive(false);
-                }
+                a.Value.SetActive(false);
             }
         }
     }

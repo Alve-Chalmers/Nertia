@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class Dying : PlayerAbilityScript
 {
-    protected override PlayerAbilityType State => PlayerAbilityType.DYING;
+    protected override PlayerAbilityType Ability => PlayerAbilityType.DYING;
 
     protected override void OnEnable()
     {
