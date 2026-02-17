@@ -8,6 +8,9 @@ abstract public class PlayerAbilityScript : MonoBehaviour
     
     protected virtual void OnEnable()
     {
-        playerInfo.AbilityUsed = Ability;
+        if (playerInfo != null)
+        {
+            playerInfo.AbilityUsed = Ability;
+        }
     }
 }
