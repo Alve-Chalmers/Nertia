@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class BTU : PlayerAbilityScript
@@ -6,6 +7,7 @@ public class BTU : PlayerAbilityScript
     [SerializeField] float force;
     [SerializeField] float targetSpeed = 5f;
     [SerializeField] float maxSlopeAngle = 45f;
+    [SerializeField] float startingTimeUntilMaxForce = 1f;
     [SerializeField] SpriteRenderer DebugDirectionSprite;
     [SerializeField] LayerMask ground;
 
@@ -13,10 +15,19 @@ public class BTU : PlayerAbilityScript
 
     int dir = -1;
 
+    float timeRunning = 0;
+
     protected override void OnEnable()
     {
         base.OnEnable();
         dir = -dir;
+        Debug.Log("STAAAAAAAAAAAAAAART\n\n\n");
+        timeRunning = 0;
+    }
+
+    void Update()
+    {
+        timeRunning += Time.deltaTime;
     }
 
     void FixedUpdate()
@@ -32,10 +43,6 @@ public class BTU : PlayerAbilityScript
         float slopeAngle = Vector2.Angle(Vector2.up, playerInfo.GroundNormal);
 
         bool goingUpHill = Mathf.Sign(playerInfo.GroundNormal.x) != dir;
-        // if (slopeAngle > maxSlopeAngle && goingUpHill)
-        // {
-        //     return;
-        // }
 
         if (prb.linearVelocity.magnitude >= targetSpeed)
         {
@@ -56,6 +63,7 @@ public class BTU : PlayerAbilityScript
             multiplier *= slopeness;
         }
 
-        prb.AddForce(groundDir * force * dir * multiplier);
+        Debug.Log(Mathf.Min(timeRunning, startingTimeUntilMaxForce) * groundDir * force * dir * multiplier);
+        prb.AddForce(Mathf.Min(timeRunning, startingTimeUntilMaxForce) * groundDir * force * dir * multiplier);
     }
 }
