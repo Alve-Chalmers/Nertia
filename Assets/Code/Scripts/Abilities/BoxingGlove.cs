@@ -6,6 +6,7 @@ public class BoxingGlove : PlayerAbilityScript
     protected override PlayerAbilityType Ability => PlayerAbilityType.BOXING_GLOVE;
     [SerializeField] float checkingRange = 1;
     [SerializeField] float force = 15;
+    [SerializeField, Tooltip("multiplies force by length(projection of direction to ground on down vector)^slopeForceReductionPower")] float slopeForceReductionPower = 1;
     [SerializeField] LayerMask maskToHit;
     [SerializeField] bool drawDebugRays;
     [SerializeField] Rigidbody2D prb;
@@ -23,7 +24,8 @@ public class BoxingGlove : PlayerAbilityScript
         dir = (closestPoint.Value - playerInfo.Position).normalized;
         transform.position = playerInfo.Position + dir;
         transform.eulerAngles = Vector3.zero;
-        prb.AddForce(-dir * force, ForceMode2D.Impulse);
+        float ajustedForDirection = Mathf.Pow(Vector3.Project(dir, Vector2.down).magnitude, slopeForceReductionPower);
+        prb.AddForce(-dir * ajustedForDirection * force, ForceMode2D.Impulse);
     }
 
     void Update()
