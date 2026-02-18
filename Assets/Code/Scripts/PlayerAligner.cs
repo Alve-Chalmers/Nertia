@@ -39,12 +39,10 @@ public class PlayerAligner : MonoBehaviour
         if (rb.linearVelocityX > 1f)
         {
             playerInfo.DirectionX = 1;
-            Debug.Log("HELLO1");
         }
         else if (rb.linearVelocityX < -1f)
         {
             playerInfo.DirectionX = -1;
-            Debug.Log("HELLO-1");
         }
         
 
