@@ -12,7 +12,7 @@ public class Glider : PlayerAbilityScript
     protected override void OnEnable()
     {
         base.OnEnable();
-        if (!playerInfo.IsGrounded) {
+        if (!playerInfo.IsGrounded && Mathf.Abs(playerInfo.Velocity.x) < 0.1f) {
             prb.AddForce(glideDirectionForce * playerInfo.DirectionX * Vector2.right, ForceMode2D.Impulse);
         }
     }
