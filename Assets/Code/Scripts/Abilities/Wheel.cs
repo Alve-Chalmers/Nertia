@@ -6,11 +6,18 @@ public class Wheel : PlayerAbilityScript
     [SerializeField] Rigidbody2D prb;
     [SerializeField] PlayerAligner playerAligner;
     [SerializeField] Collider2D playerBaseColliderToDisable;
-    [SerializeField] GameObject playerBaseSpriteToRotate;
+
+    [SerializeField] Transform playerBaseSpriteToRotate;
+
+    [Tooltip("How fast the sprite orbits to the ground position")]
+    [SerializeField] float smoothSpeed = 15f; 
 
     Vector2 spriteInitialLocalPos;
     Vector3 spriteInitialLocalRot;
-    Vector2 spriteInitialDiff;
+    Vector3 spriteWorldOffset;
+    Transform spriteParent;
+
+    Vector2 currentOffsetDirection; 
 
     protected override void OnEnable()
     {
@@ -18,23 +25,35 @@ public class Wheel : PlayerAbilityScript
         prb.freezeRotation = false;
         playerAligner.align = false;
         playerBaseColliderToDisable.enabled = false;
-        spriteInitialDiff = playerBaseSpriteToRotate.transform.position - transform.position;
-        spriteInitialLocalPos = playerBaseSpriteToRotate.transform.localPosition;
-        spriteInitialLocalRot = playerBaseSpriteToRotate.transform.localEulerAngles;
+        spriteInitialLocalPos = playerBaseSpriteToRotate.localPosition;
+        spriteInitialLocalRot = playerBaseSpriteToRotate.localEulerAngles;
+
+        spriteParent = playerBaseSpriteToRotate.parent;
+        playerBaseSpriteToRotate.parent = null;
+        
+        spriteWorldOffset = playerBaseSpriteToRotate.position - transform.position; 
+        currentOffsetDirection = spriteWorldOffset.normalized;
     }
 
-    void Update()
+    void LateUpdate()
     {
-        // playerBaseSpriteToRotate.transform.position = (Vector2)transform.position + spriteInitialDiff;
+        Vector2 normal = playerInfo.GroundNormal;
+        if (playerInfo.GroundNormal.magnitude == 0) {
+            normal = Vector2.up;
+        }
 
-        float angleDiff = playerAligner.GetAlignmentAngleDiff(playerBaseSpriteToRotate.transform.eulerAngles.z);
-        playerBaseSpriteToRotate.transform.RotateAround(transform.position, Vector3.forward, angleDiff);
+        currentOffsetDirection = Vector3.Slerp(currentOffsetDirection, normal, Time.deltaTime * smoothSpeed);
+
+        playerBaseSpriteToRotate.position = (Vector2)transform.position + currentOffsetDirection * spriteWorldOffset.magnitude;
+
+        playerBaseSpriteToRotate.eulerAngles = new Vector3(0, 0, Vector2.SignedAngle(Vector2.up, currentOffsetDirection));
     }
 
     void OnDisable()
     {
-        playerBaseSpriteToRotate.transform.localPosition = spriteInitialLocalPos;
-        playerBaseSpriteToRotate.transform.localEulerAngles = spriteInitialLocalRot;
+        playerBaseSpriteToRotate.parent = spriteParent;
+        playerBaseSpriteToRotate.localPosition = spriteInitialLocalPos;
+        playerBaseSpriteToRotate.localEulerAngles = spriteInitialLocalRot;
         prb.freezeRotation = true;
         playerAligner.align = true;
         playerBaseColliderToDisable.enabled = true;

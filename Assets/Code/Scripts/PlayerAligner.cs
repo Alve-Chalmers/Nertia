@@ -15,9 +15,6 @@ public class PlayerAligner : MonoBehaviour
     float rotationSpeed = 10f;
 
     [SerializeField]
-    float maxRotationPerSecond = 90f;
-
-    [SerializeField]
     float maxAlignmentRot;
 
     [SerializeField] LayerMask maskToHit;
@@ -49,8 +46,8 @@ public class PlayerAligner : MonoBehaviour
             playerInfo.DirectionX = -1;
         }
 
-        float angleDiff = GetAlignmentAngleDiff(rb.rotation);
-        
+        float angleDiff = GetAlignmentAngleDiff(rb.rotation, Time.fixedDeltaTime);
+
         rb.MoveRotation(rb.rotation + angleDiff);
     }
 
@@ -73,29 +70,25 @@ public class PlayerAligner : MonoBehaviour
             normalsSum += hit.normal;
         }
         playerInfo.GroundNormal = Vector2.zero;
-        
+
         targetAngleFromGroundNormal = 0;
         if (hits != 0)
         {
             Vector2 averageNormal = normalsSum / hits;
             Debug.DrawLine(playerInfo.Position, playerInfo.Position + averageNormal * castDistance, Color.yellow);
             targetAngleFromGroundNormal = Vector2.SignedAngle(Vector2.up, averageNormal);
-            playerInfo.GroundNormal = averageNormal;
+            playerInfo.GroundNormal = averageNormal.normalized;
         }
     }
 
-    public float GetAlignmentAngleDiff(float currentRotation)
+    float GetAlignmentAngleDiff(float currentRotation, float deltaTime)
     {
         float targetAngle = Mathf.Clamp(targetAngleFromGroundNormal, -maxAlignmentRot, maxAlignmentRot);
-        
-        // Smoothly interpolate to target angle
-        float smoothedAngle = Mathf.LerpAngle(currentRotation, targetAngle, rotationSpeed * Time.fixedDeltaTime);
-        
-        // Clamp max rotation change per frame to prevent jumps
-        float maxChange = maxRotationPerSecond * Time.fixedDeltaTime;
-        float angleDiff = Mathf.DeltaAngle(currentRotation, smoothedAngle);
-        angleDiff = Mathf.Clamp(angleDiff, -maxChange, maxChange);
 
+        float smoothedAngle = Mathf.MoveTowardsAngle(currentRotation, targetAngle, rotationSpeed * deltaTime);
+
+        float angleDiff = Mathf.DeltaAngle(currentRotation, smoothedAngle);
+        
         return angleDiff;
     }
 }
