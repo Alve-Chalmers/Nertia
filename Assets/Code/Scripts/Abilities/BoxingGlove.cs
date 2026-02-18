@@ -6,7 +6,6 @@ public class BoxingGlove : PlayerAbilityScript
     protected override PlayerAbilityType Ability => PlayerAbilityType.BOXING_GLOVE;
     [SerializeField] float checkingRange = 1;
     [SerializeField] float force = 15;
-    [SerializeField, Tooltip("multiplies force by length(projection of direction to ground on down vector)^slopeForceReductionPower")] float slopeForceReductionPower = 1;
     [SerializeField] LayerMask maskToHit;
     [SerializeField] bool drawDebugRays;
     [SerializeField] Rigidbody2D prb;
