@@ -40,7 +40,7 @@ public class PlayerAligner : MonoBehaviour
         {
             playerInfo.DirectionX = 1;
         }
-        else if (rb.linearVelocityX < 1f)
+        else if (rb.linearVelocityX < -1f)
         {
             playerInfo.DirectionX = -1;
         }
