@@ -21,7 +21,6 @@ public class BTU : PlayerAbilityScript
     {
         base.OnEnable();
         dir = -dir;
-        Debug.Log("STAAAAAAAAAAAAAAART\n\n\n");
         timeRunning = 0;
     }
 
@@ -63,7 +62,6 @@ public class BTU : PlayerAbilityScript
             multiplier *= slopeness;
         }
 
-        Debug.Log(Mathf.Min(timeRunning, startingTimeUntilMaxForce) * groundDir * force * dir * multiplier);
         prb.AddForce(Mathf.Min(timeRunning, startingTimeUntilMaxForce) * groundDir * force * dir * multiplier);
     }
 }
