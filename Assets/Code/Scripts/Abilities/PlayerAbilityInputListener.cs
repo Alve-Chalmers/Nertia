@@ -14,51 +14,131 @@ public class PlayerAbilityInputListener : MonoBehaviour
         public GameObject obj;
     }
 
-    [SerializeField] 
-    private List<AbilityMapping> abilityMappings = new();
+    [SerializeField] private List<AbilityMapping> abilityMappings = new();
 
-    private Dictionary<PlayerAbilityType, GameObject> abilityToObj = new();
+    private readonly Dictionary<PlayerAbilityType, GameObject> abilityObjects = new();
+    private readonly List<PlayerAbilityType> heldAbilityOrder = new();
+    private PlayerAbilityType? activeAbilityType;
 
-
-    void OnEnable()
+    private void OnEnable()
     {
-        abilityToObj.Clear();
+        abilityObjects.Clear();
         foreach (var mapping in abilityMappings)
         {
-            if (!abilityToObj.ContainsKey(mapping.type))
+            if (mapping.obj == null || abilityObjects.ContainsKey(mapping.type))
             {
-                abilityToObj.Add(mapping.type, mapping.obj);
+                continue;
             }
+
+            abilityObjects[mapping.type] = mapping.obj;
+            mapping.obj.SetActive(false);
         }
+
+        heldAbilityOrder.Clear();
+        activeAbilityType = null;
 
         useAbility.Subscribe(OnUse);
         cancelAbility.Subscribe(OnCancel);
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         useAbility.Unsubscribe(OnUse);
         cancelAbility.Unsubscribe(OnCancel);
+        heldAbilityOrder.Clear();
     }
 
-    void OnUse(PlayerAbilityType ability)
+    private void Update()
     {
-        if (abilityToObj.ContainsKey(ability))
+        if (activeAbilityType.HasValue
+            && abilityObjects.TryGetValue(activeAbilityType.Value, out GameObject activeObject)
+            && !activeObject.activeSelf)
         {
-            abilityToObj[ability].SetActive(true);
+            PlayerAbilityType endedAbilityType = activeAbilityType.Value;
+            SetInactive(endedAbilityType);
+            TryActivateHeldFallback(endedAbilityType);
         }
-        foreach (var a in abilityToObj)
+    }
+
+    private void OnUse(PlayerAbilityType requestedAbilityType)
+    {
+        RememberHeldAbility(requestedAbilityType);
+        TryActivateAbility(requestedAbilityType);
+    }
+
+    private void OnCancel(PlayerAbilityType abilityType)
+    {
+        heldAbilityOrder.Remove(abilityType);
+
+        if (activeAbilityType != abilityType)
         {
-            if (a.Key != ability)
+            return;
+        }
+
+        SetInactive(abilityType);
+        TryActivateHeldFallback();
+    }
+
+    private bool TryActivateAbility(PlayerAbilityType requestedAbilityType)
+    {
+        if (!abilityObjects.TryGetValue(requestedAbilityType, out GameObject requestedObject))
+        {
+            return false;
+        }
+
+        if (activeAbilityType == requestedAbilityType && requestedObject.activeSelf)
+        {
+            return true;
+        }
+
+        if (activeAbilityType.HasValue && activeAbilityType.Value != requestedAbilityType)
+        {
+            SetInactive(activeAbilityType.Value);
+        }
+
+        requestedObject.SetActive(true);
+        activeAbilityType = requestedAbilityType;
+        return true;
+    }
+
+    private void SetInactive(PlayerAbilityType abilityType)
+    {
+        if (abilityObjects.TryGetValue(abilityType, out GameObject obj))
+        {
+            obj.SetActive(false);
+        }
+
+        if (activeAbilityType == abilityType)
+        {
+            activeAbilityType = null;
+        }
+    }
+
+    private void RememberHeldAbility(PlayerAbilityType abilityType)
+    {
+        if (!abilityObjects.ContainsKey(abilityType))
+        {
+            return;
+        }
+
+        heldAbilityOrder.Remove(abilityType);
+        heldAbilityOrder.Add(abilityType);
+    }
+
+    private void TryActivateHeldFallback(PlayerAbilityType? exclude = null)
+    {
+        for (int i = heldAbilityOrder.Count - 1; i >= 0; i--)
+        {
+            PlayerAbilityType candidate = heldAbilityOrder[i];
+            if (exclude.HasValue && candidate == exclude.Value)
             {
-                a.Value.SetActive(false);
+                continue;
+            }
+
+            if (TryActivateAbility(candidate))
+            {
+                return;
             }
         }
-    }
-
-    void OnCancel(PlayerAbilityType ability)
-    {
-        if (abilityToObj.ContainsKey(ability))
-            abilityToObj[ability].SetActive(false);
     }
 }
