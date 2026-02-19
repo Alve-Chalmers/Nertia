@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7312842777607831820}
   - component: {fileID: 6084723017681164173}
   - component: {fileID: 3387620614793480973}
+  - component: {fileID: 8135180466540043099}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3594073207205796065}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -29.652086, y: 14.486231, z: 9.999568}
+  m_LocalPosition: {x: 6.200001, y: 2.83, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -170,6 +171,18 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!114 &8135180466540043099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3594073207205796065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83a51080c9d0dcc4ebd4d2c6b398d6df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4735674100789482962
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,6 +340,7 @@ GameObject:
   - component: {fileID: 5331790798904672106}
   - component: {fileID: 4129695706130303310}
   - component: {fileID: 6990902692761295952}
+  - component: {fileID: 7853649471073052146}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -343,7 +357,7 @@ Transform:
   m_GameObject: {fileID: 7825991181408635042}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -30.273478, y: 4.3325105, z: -10.000001}
+  m_LocalPosition: {x: -9.733283, y: 2.2372956, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -430,3 +444,18 @@ MonoBehaviour:
         PositionOffset: 0
         SearchResolution: 4
         SearchIteration: 2
+--- !u!114 &7853649471073052146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7825991181408635042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44d70cc20219cd84593f67d248eafe36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Offset: {x: 0, y: 0, z: -10}
+  ApplyAfter: 1
+  PreserveComposition: 0
