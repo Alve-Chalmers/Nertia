@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -10,6 +11,10 @@ public class BoxingGlove : PlayerAbilityScript
     [SerializeField] bool drawDebugRays;
     [SerializeField] Rigidbody2D prb;
 
+    [SerializeField] Transform spriteTransform;
+    [SerializeField] Animator spriteAnimator;
+
+    float angle;
 
     protected override void OnEnable()
     {
@@ -20,14 +25,14 @@ public class BoxingGlove : PlayerAbilityScript
             return;
         }
         Vector2 dir = (closestPoint.Value - playerInfo.Position).normalized;
-        transform.position = playerInfo.Position + dir;
-        transform.eulerAngles = Vector3.zero;
+        angle = Vector2.SignedAngle(Vector2.up, dir);
+        spriteTransform.eulerAngles = new Vector3(0, 0, angle);
         prb.AddForce(-dir * force, ForceMode2D.Impulse);
     }
 
     void Update()
     {
-        transform.eulerAngles = Vector3.zero;
+        spriteTransform.eulerAngles = new Vector3(0, 0, angle);
         DrawDebugRays();
     }
 
