@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "UnlockedAbilities", menuName = "ScriptableObjects/Data/UnlockedAbilities")]
 public class UnlockedAbilities : ScriptableObject
 {
-    [SerializeField] StartingAbilities startingAbilities;
+    [SerializeField] StartingAbilities defaultAbilities;
 
     private HashSet<PlayerAbilityType> _unlockedAbilities = null;
 
@@ -14,9 +14,13 @@ public class UnlockedAbilities : ScriptableObject
         {
             if (_unlockedAbilities == null)
             {
-                _unlockedAbilities = new HashSet<PlayerAbilityType>(startingAbilities.startingAbilities);
+                _unlockedAbilities = new HashSet<PlayerAbilityType>(defaultAbilities.startingAbilities);
             }
             return _unlockedAbilities;
+        }
+        set
+        {
+            _unlockedAbilities = value;
         }
     }
 
