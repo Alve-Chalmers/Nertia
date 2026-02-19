@@ -8,7 +8,6 @@ public class BTU : PlayerAbilityScript
     [SerializeField] float targetSpeed = 5f;
     [SerializeField] float maxSlopeAngle = 45f;
     [SerializeField] float startingTimeUntilMaxForce = 1f;
-    [SerializeField] SpriteRenderer DebugDirectionSprite;
     [SerializeField] LayerMask ground;
 
     protected override PlayerAbilityType Ability => PlayerAbilityType.BTU;
@@ -27,12 +26,11 @@ public class BTU : PlayerAbilityScript
     void Update()
     {
         timeRunning += Time.deltaTime;
+        transform.localScale = new Vector3(playerInfo.DirectionX, transform.localScale.y, transform.localScale.z);
     }
 
     void FixedUpdate()
     {
-        DebugDirectionSprite.flipX = dir == -1;
-
         if (!playerInfo.IsGrounded)
         {
             return;
