@@ -79,6 +79,27 @@ public class SOEventPlayerAbilityTypeEditor : Editor
     }
 }
 
+[CustomEditor(typeof(SOEventDialogLine))]
+public class SOEventDialogLineEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+        SOEventEditorHelper.DrawRaiseButton<SOEventDialogLine, DialogLine>((SOEventDialogLine)target);
+    }
+}
+
+[CustomEditor(typeof(SOEventConversation))]
+public class SOEventConversationEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+        SOEventEditorHelper.DrawRaiseButton<SOEventConversation, Conversation>((SOEventConversation)target);
+    }
+}
+
+
 public static class SOEventEditorHelper
 {
     public static void DrawRaiseButton<TEvent, TValue>(TEvent soEvent) where TEvent : SOEvent<TValue>

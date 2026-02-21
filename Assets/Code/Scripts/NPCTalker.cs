@@ -4,8 +4,9 @@ using UnityEngine;
 public class NPCTalker : MonoBehaviour
 {
     [SerializeField] float minPlayerCloseTime = 1f;
-    [SerializeField] SOEventVector2 npcTalkingEvent;
-    [SerializeField] SOEventVector2 npcTalkingPlayerExitEvent;
+    [SerializeField] Conversation conversationToHave;
+    [SerializeField] SOEventConversation startConversationEvent;
+    [SerializeField] SOEventConversation stopConversationEvent;
     
     Coroutine waitAndCheck;
 
@@ -33,7 +34,12 @@ public class NPCTalker : MonoBehaviour
 
     void TalkToPlayer()
     {
-        npcTalkingEvent.Raise(transform.position);
+        startConversationEvent.Raise(conversationToHave);
+    }
+
+    void StopTalkingToPlayer()
+    {
+        stopConversationEvent.Raise(conversationToHave);
     }
 
     void OnTriggerExit2D(Collider2D col)
@@ -43,6 +49,7 @@ public class NPCTalker : MonoBehaviour
 
         playerIsClose = false;
         StopCoroutine(waitAndCheck);
-        npcTalkingPlayerExitEvent.Raise(transform.position);
+
+        StopTalkingToPlayer();
     }
 }

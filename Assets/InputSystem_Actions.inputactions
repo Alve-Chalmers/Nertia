@@ -50,6 +50,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "NextDialogLine",
+                    "type": "Button",
+                    "id": "a01dde81-8dd4-4d93-994c-8e9c680e7e77",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -105,6 +114,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Dying",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "720a906f-1f89-4108-9262-0f3b18f8e23c",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextDialogLine",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
