@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class BTU : PlayerAbilityScript
 {
     [SerializeField] Rigidbody2D prb;
+    [SerializeField] PlayerDirSetter pds;
     [SerializeField] float force;
     [SerializeField] float targetSpeed = 5f;
     [SerializeField] float maxSlopeAngle = 45f;
@@ -20,11 +22,25 @@ public class BTU : PlayerAbilityScript
     {
         base.OnEnable();
         dir = -dir;
+        if (playerInfo.PreviousAbilityUsed != PlayerAbilityType.BTU)
+        {
+            Debug.Log(playerInfo.DirectionX);
+            dir = playerInfo.DirectionX;
+        }
+        pds.setPlayerDirFromVel = false;
+        playerInfo.DirectionX = dir;
+
         timeRunning = 0;
+    }
+
+    void OnDisable()
+    {
+        pds.setPlayerDirFromVel = true;
     }
 
     void Update()
     {
+        Debug.Log(playerInfo.Velocity.x);
         timeRunning += Time.deltaTime;
         transform.localScale = new Vector3(playerInfo.DirectionX, transform.localScale.y, transform.localScale.z);
     }
