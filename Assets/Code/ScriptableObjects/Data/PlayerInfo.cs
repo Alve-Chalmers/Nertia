@@ -3,13 +3,29 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerInfo", menuName = "ScriptableObjects/Data/PlayerInfo")]
 public class PlayerInfo : ScriptableObject
 {
-    [System.NonSerialized] public PlayerAbilityType? AbilityUsed = null;
+    PlayerAbilityType? _abilityUsed = null;
+
+    public PlayerAbilityType? AbilityUsed
+    {
+        get
+        {
+            return _abilityUsed;
+        }
+        set
+        {
+            PreviousAbilityUsed = _abilityUsed;
+            _abilityUsed = value;
+        }
+    }
+
+    [System.NonSerialized] public PlayerAbilityType? PreviousAbilityUsed = null;
+
     [System.NonSerialized] public Vector2 Position;
 
     /// <summary>
-    /// -1 is right, -1 is left
+    /// 1 is right, -1 is left
     /// </summary>
-    [System.NonSerialized] public int DirectionX;
+    [System.NonSerialized] public int DirectionX = 1;
 
     /// <summary>
     /// zero if no ground found

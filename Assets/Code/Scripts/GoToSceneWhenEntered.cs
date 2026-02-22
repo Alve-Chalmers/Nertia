@@ -10,10 +10,23 @@ public class GoToSceneWhenEntered : MonoBehaviour
     [SerializeField] SceneField sceneToGoTo;
     [SerializeField] List<string> tagsToLookFor;
 
+    [SerializeField] ListOfAbilities abilitiesRequired;
+    [SerializeField] UnlockedAbilities unlockedAbilities;
+
     void OnTriggerEnter2D(Collider2D col)
     {
         if (!tagsToLookFor.Contains(col.tag))
             return;
+        
+        foreach (var a in abilitiesRequired.abilities)
+        {
+            if (!unlockedAbilities.Abilities.Contains(a))
+            {
+                Debug.Log("Did not have required abilities");
+                return;
+            }
+        }
+
         SceneManager.LoadScene(sceneToGoTo);
     }
 }

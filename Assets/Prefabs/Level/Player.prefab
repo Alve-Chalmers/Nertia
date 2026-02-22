@@ -295,6 +295,7 @@ GameObject:
   - component: {fileID: 5651467352645874403}
   - component: {fileID: 1422672897529917014}
   - component: {fileID: 4685533606517872859}
+  - component: {fileID: 2954403831711744922}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -425,6 +426,21 @@ MonoBehaviour:
     obj: {fileID: 9108313235526676316}
   - type: 4
     obj: {fileID: 7265151503065775458}
+--- !u!114 &2954403831711744922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6534390457413908721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f44896a77550df94a8ecbcfb977e7bbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pi: {fileID: 11400000, guid: 2d3b20cff99313940bbf334a7a7d1b47, type: 2}
+  rb: {fileID: 5651467352645874403}
+  setPlayerDirFromVel: 1
 --- !u!1 &7194619381428211079
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,6 +589,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInfo: {fileID: 11400000, guid: 2d3b20cff99313940bbf334a7a7d1b47, type: 2}
   prb: {fileID: 5651467352645874403}
+  pds: {fileID: 2954403831711744922}
   force: 10
   targetSpeed: 5
   maxSlopeAngle: 60

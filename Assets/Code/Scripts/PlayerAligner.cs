@@ -37,19 +37,12 @@ public class PlayerAligner : MonoBehaviour
             return;
         }
 
-        if (rb.linearVelocityX > 1f)
-        {
-            playerInfo.DirectionX = 1;
-        }
-        else if (rb.linearVelocityX < -1f)
-        {
-            playerInfo.DirectionX = -1;
-        }
-
+        
         float angleDiff = GetAlignmentAngleDiff(rb.rotation, Time.fixedDeltaTime);
 
         rb.MoveRotation(rb.rotation + angleDiff);
     }
+
 
     void SetPlayerGroundNormal()
     {

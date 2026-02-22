@@ -31,6 +31,7 @@ Transform:
   m_Children:
   - {fileID: 3463041486515002795}
   - {fileID: 5073522303652634262}
+  - {fileID: 6054609465828832196}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4155834056890188801
@@ -79,6 +80,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forThisLevel: {fileID: 11400000, guid: 56a3763a68446b44891450a579591cc3, type: 2}
   unlockedAbilities: {fileID: 11400000, guid: 32305d4e646ade448a1dff0bdd83f210, type: 2}
+--- !u!1 &4840085161631729565
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6054609465828832196}
+  - component: {fileID: 6674107278765583753}
+  m_Layer: 0
+  m_Name: InputConversationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6054609465828832196
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4840085161631729565}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5123605218559556089}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6674107278765583753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4840085161631729565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6c7d4c946981544b10b3bd6db30434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startConv: {fileID: 11400000, guid: e97b7d7b5c141e94582cea4e516906ba, type: 2}
+  endConv: {fileID: 11400000, guid: 21f595e967f475e4584549a3fb86557b, type: 2}
+  showDialogLine: {fileID: 11400000, guid: a84b140806c5d014f825efddc85f48e9, type: 2}
+  hideDialogUI: {fileID: 11400000, guid: 032c40bef1faa564fb021d9d6059db92, type: 2}
 --- !u!1 &8097204335086756526
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,6 +178,8 @@ MonoBehaviour:
     sceneName: Gym
   tagsToLookFor:
   - Player
+  abilitiesRequired: {fileID: 0}
+  unlockedAbilities: {fileID: 11400000, guid: 32305d4e646ade448a1dff0bdd83f210, type: 2}
 --- !u!61 &7400063762892132400
 BoxCollider2D:
   m_ObjectHideFlags: 0
