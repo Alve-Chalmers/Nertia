@@ -1,48 +1,63 @@
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class ParallaxBG : MonoBehaviour
 {
     [SerializeField] private Transform cameraTransform;
-    [SerializeField] [Range(0f, 1f)] private float[] layerSpeeds = { 0.2f, 0.4f, 0.6f };
+    [Tooltip("Per-layer parallax: layer 0 = 0, layer 1 = this, layer 2 = 2×, etc. Higher index = moves more with camera (X).")]
+    [SerializeField] [Range(0f, 1f)] private float perLayerSpeedOffset = 0.2f;
 
-    private float _startCameraX;
-    private float[] _startLayerX;
+    private Vector2 _cameraStart;
+    private Vector2 _bgStart;
+    private float[] _layerStartX;
+    private float[] _layerStartY;
     private float[] _layerWidth;
 
     void Start()
     {
         if (cameraTransform == null) return;
-        _startCameraX = cameraTransform.position.x;
+        _cameraStart = cameraTransform.position;
+        _bgStart = transform.position;
 
         int n = transform.childCount;
-        _startLayerX = new float[n];
+        _layerStartX = new float[n];
+        _layerStartY = new float[n];
         _layerWidth = new float[n];
 
         for (int i = 0; i < n; i++)
         {
             Transform layer = transform.GetChild(i);
-            var sr = layer.GetComponent<SpriteRenderer>();
-            _startLayerX[i] = layer.position.x;
-            if (sr == null)
+            // Remove existing copies so we don't duplicate when Start runs again (ExecuteInEditMode / domain reload)
+            for (int c = layer.childCount - 1; c >= 0; c--)
             {
-                _layerWidth[i] = 10f;
-                continue;
+                if (Application.isPlaying)
+                    Destroy(layer.GetChild(c).gameObject);
+                else
+                    DestroyImmediate(layer.GetChild(c).gameObject);
             }
+            SpriteRenderer sr = layer.GetComponent<SpriteRenderer>();
 
-            float w = sr.bounds.size.x;
-            _layerWidth[i] = w;
+            float wRaw = sr != null ? sr.bounds.size.x : 10f;
+            _layerWidth[i] = Mathf.Max(0.001f, wRaw);
+            _layerStartX[i] = layer.position.x;
+            _layerStartY[i] = layer.position.y;
 
-            // Duplicate sprite left and right for seamless looping
-            CreateCopy(sr, layer, -w);
-            CreateCopy(sr, layer, w);
+            if (sr != null)
+            {
+                float w = _layerWidth[i];
+                CreateCopy(sr, layer, -w, 0f);
+                CreateCopy(sr, layer, w, 0f);
+                CreateCopy(sr, layer, -w * 2, 0f);
+                CreateCopy(sr, layer, w * 2, 0f);
+            }
         }
     }
 
-    static void CreateCopy(SpriteRenderer source, Transform parent, float localX)
+    static void CreateCopy(SpriteRenderer source, Transform parent, float localX, float localY)
     {
         var go = new GameObject(source.name + "_copy");
         go.transform.SetParent(parent, false);
-        go.transform.localPosition = new Vector3(localX, 0f, 0f);
+        go.transform.localPosition = new Vector3(localX, localY, 0f);
         var copy = go.AddComponent<SpriteRenderer>();
         copy.sprite = source.sprite;
         copy.color = source.color;
@@ -54,22 +69,39 @@ public class ParallaxBG : MonoBehaviour
 
     void Update()
     {
-        if (cameraTransform == null || _startLayerX == null) return;
+        if (cameraTransform == null) return;
+        int n = transform.childCount;
+        if (_layerStartX == null || _layerStartY == null || _layerStartX.Length != n) return;
 
         float cameraX = cameraTransform.position.x;
-        float dx = cameraX - _startCameraX;
+        float cameraY = cameraTransform.position.y;
+        float dx = cameraX - _cameraStart.x;
+        Vector2 bgNow = transform.position;
+        // Anchor to current BG position so moving the empty moves everything
+        float closestY = n > 0 ? bgNow.y + (_layerStartY[n - 1] - _bgStart.y) : bgNow.y;
+        float yCameraTarget = cameraY + (bgNow.y - _cameraStart.y);
 
-        for (int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < n; i++)
         {
-            float speed = i < layerSpeeds.Length ? layerSpeeds[i] : 0.5f;
-            float x = _startLayerX[i] + dx * speed;
+            // X: relative to current BG position
+            float parallax = i * perLayerSpeedOffset;
+            float x = bgNow.x + (_layerStartX[i] - _bgStart.x) + dx * parallax;
+            x = WrapHorizontal(x, cameraX, _layerWidth[i]);
 
-            float w = _layerWidth[i];
-            while (x < cameraX - w) x += w;
-            while (x > cameraX + w) x -= w;
+            // Y: furthest = camera (offset by current BG height), closest = fixed to current BG, others proportional
+            float t = n <= 1 ? 0f : (float)i / (n - 1);
+            float y = Mathf.Lerp(closestY, yCameraTarget, t);
 
             Transform child = transform.GetChild(i);
-            child.position = new Vector3(x, child.position.y, child.position.z);
+            child.position = new Vector3(x, y, child.position.z);
         }
+    }
+
+    static float WrapHorizontal(float x, float cameraX, float layerWidth)
+    {
+        if (layerWidth <= 0.001f) return x; // avoid infinite loop from zero/negative width
+        while (x < cameraX - layerWidth) x += layerWidth;
+        while (x > cameraX + layerWidth) x -= layerWidth;
+        return x;
     }
 }
