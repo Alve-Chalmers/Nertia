@@ -42,11 +42,16 @@ public class InputConversationManager : MonoBehaviour
 
     void OnEndInputConversation(Conversation c)
     {
+        if (currentConversation == null)
+            return;
         End();
     }
 
     void OnNextLineKeyInput(InputAction.CallbackContext _)
     {
+        if (currentConversation == null)
+            return;
+
         ShowNextLine();
     }
 
@@ -56,20 +61,38 @@ public class InputConversationManager : MonoBehaviour
         {
             return;
         }
+
+        if (indexOfNextDialogLine > 0)
+        {
+            DialogLine dl = currentConversation.dialogLines[indexOfNextDialogLine-1];
+            if (dl.eventToRaiseAfter != null)
+            {
+                dl.eventToRaiseAfter.Raise();
+            }
+        }
+
         if (indexOfNextDialogLine >= currentConversation.dialogLines.Count)
         {
             End();
             return;
         }
-        DialogLine d = currentConversation.dialogLines[indexOfNextDialogLine];
-        showDialogLine.Raise(d);
-        indexOfNextDialogLine += 1;
+
+        {    
+            DialogLine dl = currentConversation.dialogLines[indexOfNextDialogLine];
+            if (dl.eventToRaiseBefore != null)
+            {
+                dl.eventToRaiseBefore.Raise();
+            }
+            showDialogLine.Raise(dl);
+            indexOfNextDialogLine += 1;
+        }
     }
 
     void End()
     {
         indexOfNextDialogLine = 0;
-        
+        currentConversation.hasBeen = true;
+        currentConversation = null;
         hideDialogUI.Raise();
     }
 }

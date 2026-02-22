@@ -28,12 +28,15 @@ public class NPCTalker : MonoBehaviour
         // could check e.g. player speed also
         if (playerIsClose)
         {
-            TalkToPlayer();
+            TryTalkToPlayer();
         }
     }
 
-    void TalkToPlayer()
+    void TryTalkToPlayer()
     {
+        if (conversationToHave.hasBeen && !conversationToHave.canHaveAgain)
+            return;
+        
         startConversationEvent.Raise(conversationToHave);
     }
 
