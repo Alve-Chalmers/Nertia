@@ -88,8 +88,8 @@ public class ParallaxBG : MonoBehaviour
             float x = bgNow.x + (_layerStartX[i] - _bgStart.x) + dx * parallax;
             x = WrapHorizontal(x, cameraX, _layerWidth[i]);
 
-            // Y: furthest = camera (offset by current BG height), closest = fixed to current BG, others proportional
-            float t = n <= 1 ? 0f : (float)i / (n - 1);
+            // Y: player counts as first (closest) layer at t=0; visible layers start at t=1/n so closest visible is offset
+            float t = n <= 0 ? 0f : (float)(i + 1) / (n + 1);
             float y = Mathf.Lerp(closestY, yCameraTarget, t);
 
             Transform child = transform.GetChild(i);
