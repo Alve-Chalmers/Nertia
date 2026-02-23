@@ -18,7 +18,17 @@ public class DebugAbilitiesText : MonoBehaviour
         t.text = "";
         foreach (var a in unlockedAbilities.Abilities)
         {
-            t.text += a.ToString() + "\n";
+            string key = "";
+            Debug.LogWarning(a);
+            switch (a)
+            {
+                case PlayerAbilityType.BTU: key = "Q"; break;
+                case PlayerAbilityType.DYING: key = "K"; break;
+                case PlayerAbilityType.WHEEL: key = "W"; break;
+                case PlayerAbilityType.BOXING_GLOVE: key = "E"; break;
+                case PlayerAbilityType.GLIDER: key = "R"; break;
+            }
+            t.text += key + " - " + a.ToString() + "\n";
         }
     }
 
