@@ -24,7 +24,6 @@ public class BTU : PlayerAbilityScript
         dir = -dir;
         if (playerInfo.PreviousAbilityUsed != PlayerAbilityType.BTU)
         {
-            Debug.Log(playerInfo.DirectionX);
             dir = playerInfo.DirectionX;
         }
         pds.setPlayerDirFromVel = false;
@@ -40,7 +39,6 @@ public class BTU : PlayerAbilityScript
 
     void Update()
     {
-        Debug.Log(playerInfo.Velocity.x);
         timeRunning += Time.deltaTime;
         transform.localScale = new Vector3(playerInfo.DirectionX, transform.localScale.y, transform.localScale.z);
     }
