@@ -18,12 +18,14 @@ public class GoToSceneWhenEntered : MonoBehaviour
         if (!tagsToLookFor.Contains(col.tag))
             return;
         
-        foreach (var a in abilitiesRequired.abilities)
-        {
-            if (!unlockedAbilities.Abilities.Contains(a))
+        if (abilitiesRequired != null) {
+            foreach (var a in abilitiesRequired.abilities)
             {
-                Debug.Log("Did not have required abilities");
-                return;
+                if (!unlockedAbilities.Abilities.Contains(a))
+                {
+                    Debug.Log("Did not have required abilities");
+                    return;
+                }
             }
         }
 
