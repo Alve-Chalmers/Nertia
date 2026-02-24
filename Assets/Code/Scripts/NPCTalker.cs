@@ -16,6 +16,11 @@ public class NPCTalker : MonoBehaviour
 
     bool playerIsClose = false;
 
+    void Awake()
+    {
+        conversationToHave.hasBeen = false;
+    }
+
     void OnTriggerEnter2D(Collider2D col)
     {
         if (!col.CompareTag("Player"))
