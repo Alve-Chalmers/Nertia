@@ -25,7 +25,8 @@ public class BTU : PlayerAbilityScript
     {
         base.OnEnable();
         float timeSinceDisable = Time.time - timeOfDisable;
-        if (timeSinceDisable <= maxDisableTimeForFlip)
+        if (playerInfo.PreviousAbilityUsed == PlayerAbilityType.BTU 
+            && timeSinceDisable <= maxDisableTimeForFlip)
         {
             dir = -dir;
         }
