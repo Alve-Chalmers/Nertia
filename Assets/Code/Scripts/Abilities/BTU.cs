@@ -10,6 +10,7 @@ public class BTU : PlayerAbilityScript
     [SerializeField] float targetSpeed = 5f;
     [SerializeField] float maxSlopeAngle = 45f;
     [SerializeField] float startingTimeUntilMaxForce = 1f;
+    [SerializeField] float maxDisableTimeForFlip = 0.3f;
     [SerializeField] LayerMask ground;
 
     protected override PlayerAbilityType Ability => PlayerAbilityType.BTU;
@@ -18,14 +19,21 @@ public class BTU : PlayerAbilityScript
 
     float timeRunning = 0;
 
+    float timeOfDisable = 0;
+
     protected override void OnEnable()
     {
         base.OnEnable();
-        dir = -dir;
-        if (playerInfo.PreviousAbilityUsed != PlayerAbilityType.BTU)
+        float timeSinceDisable = Time.time - timeOfDisable;
+        if (timeSinceDisable <= maxDisableTimeForFlip)
+        {
+            dir = -dir;
+        }
+        else
         {
             dir = playerInfo.DirectionX;
         }
+        
         pds.setPlayerDirFromVel = false;
         playerInfo.DirectionX = dir;
 
@@ -35,6 +43,7 @@ public class BTU : PlayerAbilityScript
     void OnDisable()
     {
         pds.setPlayerDirFromVel = true;
+        timeOfDisable = Time.time;
     }
 
     void Update()
