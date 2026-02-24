@@ -8,6 +8,10 @@ public class NPCTalker : MonoBehaviour
     [SerializeField] SOEventConversation startConversationEvent;
     [SerializeField] SOEventConversation stopConversationEvent;
     
+    [Header("For looking at player")]
+    [SerializeField] PlayerInfo playerInfo;
+    [SerializeField] SpriteRenderer spriteToFlip;
+    
     Coroutine waitAndCheck;
 
     bool playerIsClose = false;
@@ -19,6 +23,15 @@ public class NPCTalker : MonoBehaviour
 
         playerIsClose = true;
         waitAndCheck = StartCoroutine(WaitAndCheck());
+    }
+
+    void Update()
+    {
+        if (!playerIsClose)
+            return;
+        
+        if (spriteToFlip != null && playerInfo != null)
+            spriteToFlip.flipX = playerInfo.Position.x < transform.position.x;
     }
 
     IEnumerator WaitAndCheck()

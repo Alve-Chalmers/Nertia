@@ -73,6 +73,7 @@ public class InputConversationManager : MonoBehaviour
 
         if (indexOfNextDialogLine >= currentConversation.dialogLines.Count)
         {
+            currentConversation.hasBeen = true;
             End();
             return;
         }
@@ -90,8 +91,14 @@ public class InputConversationManager : MonoBehaviour
 
     void End()
     {
+        if (currentConversation != null &&
+            currentConversation.dialogLines != null &&
+            indexOfNextDialogLine == currentConversation.dialogLines.Count)
+        {
+            currentConversation.hasBeen = true;
+        }
+
         indexOfNextDialogLine = 0;
-        currentConversation.hasBeen = true;
         currentConversation = null;
         hideDialogUI.Raise();
     }
