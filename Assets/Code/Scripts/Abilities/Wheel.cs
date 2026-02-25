@@ -17,8 +17,12 @@ public class Wheel : PlayerAbilityScript
 
     Vector2 currentOffsetDirection;
 
+    float lastAngularVelocity = 0f;
+
     protected override void OnEnable()
     {
+        //prb.mass = 0.001f;
+        
         base.OnEnable();
         prb.freezeRotation = false;
         playerAligner.align = false;
@@ -28,6 +32,7 @@ public class Wheel : PlayerAbilityScript
 
         spriteWorldOffset = playerBaseToRotate.position - transform.position;
         currentOffsetDirection = spriteWorldOffset.normalized;
+        prb.angularVelocity = lastAngularVelocity;
     }
 
     void LateUpdate()
@@ -46,6 +51,8 @@ public class Wheel : PlayerAbilityScript
 
     void OnDisable()
     {
+        //prb.mass = 1f;
+        lastAngularVelocity = prb.angularVelocity;
         playerBaseToRotate.localPosition = spriteInitialLocalPos;
         playerBaseToRotate.localEulerAngles = spriteInitialLocalRot;
         prb.freezeRotation = true;
