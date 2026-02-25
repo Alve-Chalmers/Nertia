@@ -52,6 +52,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "GrapplingHook",
+                    "type": "Button",
+                    "id": "79e2df8c-a8e0-4159-a17e-a817121f0a71",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "NextDialogLine",
                     "type": "Button",
                     "id": "a01dde81-8dd4-4d93-994c-8e9c680e7e77",
@@ -76,7 +85,7 @@
                 {
                     "name": "",
                     "id": "1ef54cfb-f282-4d08-ae56-a29622993986",
-                    "path": "<Keyboard>/q",
+                    "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -98,7 +107,7 @@
                 {
                     "name": "",
                     "id": "4346d826-7b77-435d-8fd3-264d4a8b9552",
-                    "path": "<Keyboard>/r",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -125,6 +134,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "NextDialogLine",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "832f3e7f-5f25-42b0-b30c-08221f97d05d",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GrapplingHook",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
