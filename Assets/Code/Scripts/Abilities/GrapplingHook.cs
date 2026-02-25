@@ -42,6 +42,7 @@ public class GrapplingHook : PlayerAbilityScript
     }
 
     void OnDisable() {
+        prb.rotation = 0;
         prb.freezeRotation = true;
         playerHingeJoint.enabled = false;
     }
