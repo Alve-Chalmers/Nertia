@@ -21,8 +21,6 @@ public class Wheel : PlayerAbilityScript
 
     protected override void OnEnable()
     {
-        //prb.mass = 0.001f;
-        
         base.OnEnable();
         prb.freezeRotation = false;
         playerAligner.align = false;
@@ -51,7 +49,6 @@ public class Wheel : PlayerAbilityScript
 
     void OnDisable()
     {
-        //prb.mass = 1f;
         lastAngularVelocity = prb.angularVelocity;
         playerBaseToRotate.localPosition = spriteInitialLocalPos;
         playerBaseToRotate.localEulerAngles = spriteInitialLocalRot;
