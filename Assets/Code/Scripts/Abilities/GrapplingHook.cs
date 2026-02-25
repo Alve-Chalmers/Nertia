@@ -49,7 +49,7 @@ public class GrapplingHook : PlayerAbilityScript
     void Update()
     {
         lineRenderer.SetPosition(0, transform.position);
-        if (hitPoint != null)
+        if (hitPoint != null && hitHook)
             lineRenderer.SetPosition(1, hitPoint.Value);
         else
             lineRenderer.SetPosition(1, (Vector2)transform.position + GetHookVec());
@@ -78,7 +78,7 @@ public class GrapplingHook : PlayerAbilityScript
 
 
         hitHook = ((1 << hit.collider.gameObject.layer) & hookMask.value) != 0;
-        hitPoint = hit.point;
+        hitPoint = hitHook ? hit.collider.transform.position : hit.point;
     }
 
     void OnDrawGizmos()
