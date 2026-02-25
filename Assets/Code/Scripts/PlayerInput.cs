@@ -19,6 +19,7 @@ public class PlayerInput : MonoBehaviour
         {"Wheel", PlayerAbilityType.WHEEL},
         {"BoxingGlove", PlayerAbilityType.BOXING_GLOVE},
         {"Glider", PlayerAbilityType.GLIDER},
+        {"GrapplingHook", PlayerAbilityType.GRAPPLING_HOOK},
     };
 
     private void OnEnable()
