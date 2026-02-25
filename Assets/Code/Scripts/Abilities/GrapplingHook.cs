@@ -11,7 +11,7 @@ public class GrapplingHook : PlayerAbilityScript
     [SerializeField] LayerMask hookMask;
 
     [SerializeField] Rigidbody2D prb;
-    [SerializeField] HingeJoint2D playerHingeJoint;
+    [SerializeField] DistanceJoint2D playerDistanceJoint;
 
     [SerializeField] LineRenderer lineRenderer;
 
@@ -36,22 +36,31 @@ public class GrapplingHook : PlayerAbilityScript
 
         prb.rotation = 0;
         prb.freezeRotation = false;
-        playerHingeJoint.connectedAnchor = hitPoint.Value;
-        playerHingeJoint.anchor = transform.InverseTransformPoint(hitPoint.Value);
-        playerHingeJoint.enabled = true;
+        playerDistanceJoint.connectedAnchor = hitPoint.Value;
+        playerDistanceJoint.anchor = Vector2.zero;
+        playerDistanceJoint.distance = Vector2.Distance(transform.position, hitPoint.Value);
+        playerDistanceJoint.maxDistanceOnly = true;
+        playerDistanceJoint.enabled = true;
     }
 
     void OnDisable() {
         prb.rotation = 0;
         prb.freezeRotation = true;
-        playerHingeJoint.enabled = false;
+        playerDistanceJoint.enabled = false;
     }
 
     void Update()
     {
         lineRenderer.SetPosition(0, transform.position);
         if (hitPoint != null && hitHook)
+        {
             lineRenderer.SetPosition(1, hitPoint.Value);
+            float currentDist = Vector2.Distance(transform.position, hitPoint.Value);
+            if (currentDist < playerDistanceJoint.distance)
+            {
+                playerDistanceJoint.distance = currentDist;
+            }
+        }
         else
             lineRenderer.SetPosition(1, (Vector2)transform.position + GetHookVec());
     }

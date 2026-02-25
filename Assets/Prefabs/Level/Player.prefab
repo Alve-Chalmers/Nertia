@@ -585,8 +585,8 @@ MonoBehaviour:
   pi: {fileID: 11400000, guid: 2d3b20cff99313940bbf334a7a7d1b47, type: 2}
   rb: {fileID: 5651467352645874403}
   setPlayerDirFromVel: 1
---- !u!233 &3340859489873221852
-HingeJoint2D:
+--- !u!228 &3340859489873221852
+DistanceJoint2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -603,14 +603,9 @@ HingeJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 40.3, y: -3.4}
   m_UseConnectedAnchor: 1
-  m_UseMotor: 0
-  m_Motor:
-    m_MotorSpeed: 0
-    m_MaximumMotorForce: 10000
-  m_UseLimits: 0
-  m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 359
+  m_AutoConfigureDistance: 0
+  m_Distance: 0
+  m_MaxDistanceOnly: 1
 --- !u!1 &7194619381428211079
 GameObject:
   m_ObjectHideFlags: 0
@@ -949,7 +944,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   prb: {fileID: 5651467352645874403}
-  playerHingeJoint: {fileID: 3340859489873221852}
+  playerDistanceJoint: {fileID: 3340859489873221852}
   lineRenderer: {fileID: 1069785539097478684}
 --- !u!1 &9108313235526676316
 GameObject:
