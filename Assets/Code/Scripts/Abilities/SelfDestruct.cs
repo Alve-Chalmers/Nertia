@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Dying : PlayerAbilityScript
+public class SelfDestruct : PlayerAbilityScript
 {
     [SerializeField] SOEvent playerDeathEvent;
     protected override PlayerAbilityType Ability => PlayerAbilityType.SELF_DESTRUCT;
