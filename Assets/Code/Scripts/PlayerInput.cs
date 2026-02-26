@@ -14,7 +14,7 @@ public class PlayerInput : MonoBehaviour
 
     private static readonly Dictionary<string, PlayerAbilityType> abilityDict = new() 
     {
-        {"Dying", PlayerAbilityType.DYING},
+        {"Dying", PlayerAbilityType.RESET},
         {"BTU", PlayerAbilityType.BTU},
         {"Wheel", PlayerAbilityType.WHEEL},
         {"BoxingGlove", PlayerAbilityType.BOXING_GLOVE},

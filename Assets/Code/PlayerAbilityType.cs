@@ -4,6 +4,6 @@ public enum PlayerAbilityType
     WHEEL,
     BOXING_GLOVE,
     GLIDER,
-    DYING,
+    RESET,
     GRAPPLING_HOOK,
 }

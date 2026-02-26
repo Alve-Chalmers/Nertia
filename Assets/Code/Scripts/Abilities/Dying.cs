@@ -3,7 +3,7 @@ using UnityEngine;
 public class Dying : PlayerAbilityScript
 {
     [SerializeField] SOEvent playerDeathEvent;
-    protected override PlayerAbilityType Ability => PlayerAbilityType.DYING;
+    protected override PlayerAbilityType Ability => PlayerAbilityType.RESET;
 
     protected override void OnEnable()
     {
