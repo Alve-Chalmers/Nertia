@@ -43,7 +43,7 @@ public class UnlockAbilitiesIconBar : MonoBehaviour
 
         GameObject iconGameObject = Instantiate(abilityIconPrefab);
         iconGameObject.GetComponent<AbilityIcon>().SetData(ability);
-        iconGameObject.transform.SetParent(transform);
+        iconGameObject.transform.SetParent(transform, false);
         icons.Add(ability, iconGameObject);
     }
 
