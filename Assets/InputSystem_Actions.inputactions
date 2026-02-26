@@ -25,7 +25,16 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "BTU",
+                    "name": "BTULeft",
+                    "type": "Button",
+                    "id": "63d5e830-b97a-42f2-9ee2-fb6f0dc74ecc",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "BTURight",
                     "type": "Button",
                     "id": "77c022ca-5773-49be-b9e5-ad82c4a57e9e",
                     "expectedControlType": "",
@@ -89,7 +98,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "BTU",
+                    "action": "BTURight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -145,6 +154,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "GrapplingHook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ebd89f35-291a-4771-b457-7037746bd963",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BTULeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
