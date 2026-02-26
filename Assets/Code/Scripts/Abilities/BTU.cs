@@ -68,6 +68,7 @@ public abstract class BTU : PlayerAbilityScript
             multiplier *= slopeness;
         }
 
-        prb.AddForce(Mathf.Min(timeRunning, startingTimeUntilMaxForce) * groundDir * force * Dir * multiplier);
+        float startScale = Mathf.Lerp(0.2f, 1, timeRunning / startingTimeUntilMaxForce);
+        prb.AddForce(startScale * groundDir * force * Dir * multiplier);
     }
 }
