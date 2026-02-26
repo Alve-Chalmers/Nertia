@@ -11,6 +11,9 @@ public class Wheel : PlayerAbilityScript
     [Tooltip("How fast the sprite orbits to the ground position")]
     [SerializeField] float smoothSpeed = 15f;
 
+    [Tooltip("Effective rotational inertia when wheel is active. Very low = bearing-like, no braking.")]
+    [SerializeField] float wheelInertia = 0.0001f;
+
     Vector2 spriteInitialLocalPos;
     Vector3 spriteInitialLocalRot;
     Vector3 spriteWorldOffset;
@@ -30,7 +33,11 @@ public class Wheel : PlayerAbilityScript
 
         spriteWorldOffset = playerBaseToRotate.position - transform.position;
         currentOffsetDirection = spriteWorldOffset.normalized;
-        prb.angularVelocity = lastAngularVelocity;
+    }
+
+    void FixedUpdate()
+    {
+        prb.inertia = wheelInertia;
     }
 
     void LateUpdate()
@@ -49,7 +56,6 @@ public class Wheel : PlayerAbilityScript
 
     void OnDisable()
     {
-        lastAngularVelocity = prb.angularVelocity;
         playerBaseToRotate.localPosition = spriteInitialLocalPos;
         playerBaseToRotate.localEulerAngles = spriteInitialLocalRot;
         prb.freezeRotation = true;

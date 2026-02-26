@@ -5,4 +5,5 @@ public enum PlayerAbilityType
     BOXING_GLOVE,
     GLIDER,
     DYING,
+    GRAPPLING_HOOK,
 }
