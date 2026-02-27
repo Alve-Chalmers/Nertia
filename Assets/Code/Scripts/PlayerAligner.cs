@@ -7,6 +7,7 @@ public class PlayerAligner : MonoBehaviour
     private Rigidbody2D rb;
 
     public bool align = true;
+    public bool alignToGroundNormal = true;
 
     [SerializeField]
     float castDistance = 2f;
@@ -21,7 +22,7 @@ public class PlayerAligner : MonoBehaviour
 
     [SerializeField] PlayerInfo playerInfo;
 
-    float targetAngleFromGroundNormal;
+    public float targetAngle;
 
     void Start()
     {
@@ -32,15 +33,17 @@ public class PlayerAligner : MonoBehaviour
     {
         SetPlayerGroundNormal();
 
-        if (!align)
+        if (alignToGroundNormal)
         {
-            return;
+            targetAngle = Vector2.SignedAngle(Vector2.up, playerInfo.GroundNormal);
         }
-
         
-        float angleDiff = GetAlignmentAngleDiff(rb.rotation, Time.fixedDeltaTime);
+        if (align)
+        {
+            float angleDiff = GetAlignmentAngleDiff(rb.rotation, Time.fixedDeltaTime);
 
-        rb.MoveRotation(rb.rotation + angleDiff);
+            rb.MoveRotation(rb.rotation + angleDiff);
+        }
     }
 
 
@@ -64,21 +67,19 @@ public class PlayerAligner : MonoBehaviour
         }
         playerInfo.GroundNormal = Vector2.zero;
 
-        targetAngleFromGroundNormal = 0;
         if (hits != 0)
         {
             Vector2 averageNormal = normalsSum / hits;
             Debug.DrawLine(playerInfo.Position, playerInfo.Position + averageNormal * castDistance, Color.yellow);
-            targetAngleFromGroundNormal = Vector2.SignedAngle(Vector2.up, averageNormal);
             playerInfo.GroundNormal = averageNormal.normalized;
         }
     }
 
     float GetAlignmentAngleDiff(float currentRotation, float deltaTime)
     {
-        float targetAngle = Mathf.Clamp(targetAngleFromGroundNormal, -maxAlignmentRot, maxAlignmentRot);
+        float targetAngleClamped = Mathf.Clamp(targetAngle, -maxAlignmentRot, maxAlignmentRot);
 
-        float smoothedAngle = Mathf.MoveTowardsAngle(currentRotation, targetAngle, rotationSpeed * deltaTime);
+        float smoothedAngle = Mathf.MoveTowardsAngle(currentRotation, targetAngleClamped, rotationSpeed * deltaTime);
 
         float angleDiff = Mathf.DeltaAngle(currentRotation, smoothedAngle);
         
