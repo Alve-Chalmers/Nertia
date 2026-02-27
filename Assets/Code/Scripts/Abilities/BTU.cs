@@ -2,41 +2,26 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class BTU : PlayerAbilityScript
+public abstract class BTU : PlayerAbilityScript
 {
     [SerializeField] Rigidbody2D prb;
     [SerializeField] PlayerDirSetter pds;
-    [SerializeField] float force;
+    [SerializeField] float force = 10f;
     [SerializeField] float targetSpeed = 5f;
-    [SerializeField] float maxSlopeAngle = 45f;
+    [SerializeField] float maxSlopeAngle = 50f;
     [SerializeField] float startingTimeUntilMaxForce = 1f;
-    [SerializeField] float maxDisableTimeForFlip = 0.3f;
     [SerializeField] LayerMask ground;
 
-    protected override PlayerAbilityType Ability => PlayerAbilityType.BTU;
 
-    int dir = -1;
+    protected abstract int Dir {get;}
 
     float timeRunning = 0;
-
-    float timeOfDisable = 0;
 
     protected override void OnEnable()
     {
         base.OnEnable();
-        float timeSinceDisable = Time.time - timeOfDisable;
-        if (playerInfo.PreviousAbilityUsed == PlayerAbilityType.BTU 
-            && timeSinceDisable <= maxDisableTimeForFlip)
-        {
-            dir = -dir;
-        }
-        else
-        {
-            dir = playerInfo.DirectionX;
-        }
-        
         pds.setPlayerDirFromVel = false;
-        playerInfo.DirectionX = dir;
+        playerInfo.DirectionX = Dir;
 
         timeRunning = 0;
     }
@@ -44,7 +29,6 @@ public class BTU : PlayerAbilityScript
     void OnDisable()
     {
         pds.setPlayerDirFromVel = true;
-        timeOfDisable = Time.time;
     }
 
     void Update()
@@ -63,7 +47,7 @@ public class BTU : PlayerAbilityScript
         Vector2 groundDir = Vector3.Cross(playerInfo.GroundNormal, Vector3.forward);
         float slopeAngle = Vector2.Angle(Vector2.up, playerInfo.GroundNormal);
 
-        bool goingUpHill = Mathf.Sign(playerInfo.GroundNormal.x) != dir;
+        bool goingUpHill = Mathf.Sign(playerInfo.GroundNormal.x) != Dir;
 
         if (prb.linearVelocity.magnitude >= targetSpeed)
         {
@@ -84,6 +68,7 @@ public class BTU : PlayerAbilityScript
             multiplier *= slopeness;
         }
 
-        prb.AddForce(Mathf.Min(timeRunning, startingTimeUntilMaxForce) * groundDir * force * dir * multiplier);
+        float startScale = Mathf.Lerp(0.2f, 1, timeRunning / startingTimeUntilMaxForce);
+        prb.AddForce(startScale * groundDir * force * Dir * multiplier);
     }
 }
