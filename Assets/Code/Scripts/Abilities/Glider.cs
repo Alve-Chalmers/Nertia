@@ -44,9 +44,9 @@ public class Glider : PlayerAbilityScript
             prb.AddForce(counterForce * Vector2.up);
             prb.AddForce(-prb.linearVelocityY * glideDirectionForce * Vector2.right * playerInfo.DirectionX);
         }
-
+        Debug.Log(prb.linearVelocity);
         if (!playerInfo.IsGrounded)
-            playerAligner.targetAngle = Vector2.SignedAngle(Vector2.right*playerInfo.DirectionX, prb.linearVelocity) * 0.5f;
+            playerAligner.targetAngle = -Mathf.Sign(prb.linearVelocityX) * Mathf.Lerp(0, 30, Mathf.Abs(prb.linearVelocityX) / 30f);
         
         playerAligner.alignToGroundNormal = playerInfo.IsGrounded;
     }
