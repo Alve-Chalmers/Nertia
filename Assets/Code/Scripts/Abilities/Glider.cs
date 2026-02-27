@@ -29,6 +29,13 @@ public class Glider : PlayerAbilityScript
         prb.linearDamping = originalDampening;
     }
 
+    void Update()
+    {
+        Vector3 rot = transform.eulerAngles;
+        rot.z = 0;
+        transform.eulerAngles = rot;
+    }
+
     void FixedUpdate()
     {
         if (prb.linearVelocityY < 0)
