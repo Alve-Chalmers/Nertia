@@ -7,6 +7,15 @@
             "id": "df70fa95-8a34-4494-b137-73ab6b9c7d37",
             "actions": [
                 {
+                    "name": "SelfDestruct",
+                    "type": "Button",
+                    "id": "1425ecfc-4e4b-401b-a454-2f8762192fee",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Wheel",
                     "type": "Button",
                     "id": "a03e02bc-5ad3-4508-a3e6-72a5388fe8bf",
@@ -37,15 +46,6 @@
                     "name": "Glider",
                     "type": "Button",
                     "id": "799c5250-dfec-4496-b2d3-bc022b89750d",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Dying",
-                    "type": "Button",
-                    "id": "1425ecfc-4e4b-401b-a454-2f8762192fee",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -122,7 +122,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Dying",
+                    "action": "SelfDestruct",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

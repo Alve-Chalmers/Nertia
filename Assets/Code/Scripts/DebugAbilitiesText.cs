@@ -33,7 +33,7 @@ public class DebugAbilitiesText : MonoBehaviour
             switch (a)
             {
                 case PlayerAbilityType.BTU: key = "Q"; break;
-                case PlayerAbilityType.DYING: key = "K"; break;
+                case PlayerAbilityType.SELF_DESTRUCT: key = "K"; break;
                 case PlayerAbilityType.WHEEL: key = "W"; break;
                 case PlayerAbilityType.BOXING_GLOVE: key = "E"; break;
                 case PlayerAbilityType.GLIDER: key = "R"; break;
