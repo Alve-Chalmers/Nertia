@@ -12,7 +12,7 @@ public class DialogTrigger : MonoBehaviour
     float extraTimePerLetter = 0.1f;
     bool hasTriggered = false;
 
-
+    bool showingTheDialogLine = false;
     bool willCloseTheDialog = true;
 
     void Awake()
@@ -28,8 +28,11 @@ public class DialogTrigger : MonoBehaviour
         willCloseTheDialog = true;
 
         DialogLine line = conversation.dialogLines[dialogLineIndex];
+        if (line.eventToRaiseBefore != null)
+            line.eventToRaiseBefore.Raise();
         showDialogLine.Raise(line);
         hasTriggered = true;
+        showingTheDialogLine = true;
 
         float time = baseShowLineTime + line.words.Length * extraTimePerLetter;
         StartCoroutine(WaitAndCloseDialog(time));
@@ -37,9 +40,13 @@ public class DialogTrigger : MonoBehaviour
 
     void OnShowDialogLine(DialogLine d)
     {
-        if (d != conversation.dialogLines[dialogLineIndex])
+        DialogLine thisLine = conversation.dialogLines[dialogLineIndex];
+        if (d != thisLine && showingTheDialogLine)
         {
             willCloseTheDialog = false;
+            showingTheDialogLine = false;
+            if (thisLine.eventToRaiseAfter != null)
+                thisLine.eventToRaiseAfter.Raise();
         }
     }
 
@@ -48,6 +55,9 @@ public class DialogTrigger : MonoBehaviour
         yield return new WaitForSeconds(time);
         if (willCloseTheDialog)
         {
+            DialogLine thisLine = conversation.dialogLines[dialogLineIndex];
+            if (thisLine.eventToRaiseAfter != null)
+                thisLine.eventToRaiseAfter.Raise();
             hideDialogUI.Raise();
         }
         willCloseTheDialog = true;
