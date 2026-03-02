@@ -1,9 +1,10 @@
 public enum PlayerAbilityType
 {
-    BTU,
+    SELF_DESTRUCT,
+    BTU_LEFT,
+    BTU_RIGHT,
     WHEEL,
     BOXING_GLOVE,
     GLIDER,
-    DYING,
     GRAPPLING_HOOK,
 }
