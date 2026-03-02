@@ -1,32 +1,35 @@
-using System;
 using UnityEngine;
 
 public class Glider : PlayerAbilityScript
 {
     protected override PlayerAbilityType Ability => PlayerAbilityType.GLIDER;
-    [SerializeField] float glideUpForce = 20f;
-    [SerializeField] float glideDirectionForce = 10f;
-    [SerializeField] float damping = 5f;
+
+    [Tooltip("How much velocity is lost each second (0-1). Small values = subtle drag.")]
+    [SerializeField] float damping = 0.05f;
+
+    [Tooltip("How much downward velocity is converted to horizontal. Like glide ratio - higher = more forward speed from falling.")]
+    [SerializeField] float heightToHorizontalConversion = 8f;
+
+    [Tooltip("Max fall speed (positive). Jellyfish floatiness - gentle terminal velocity.")]
+    [SerializeField] float maxFallSpeed = 8f;
+
     [SerializeField] Rigidbody2D prb;
     [SerializeField] PlayerAligner playerAligner;
 
-    float originalDampening;
+    float originalDamping;
 
     protected override void OnEnable()
     {
         base.OnEnable();
-       /*  if (!playerInfo.IsGrounded && Mathf.Abs(playerInfo.Velocity.x) < 0.1f) {
-            prb.AddForce(glideDirectionForce * playerInfo.DirectionX * Vector2.right, ForceMode2D.Impulse);
-        } */
         playerAligner.alignToGroundNormal = false;
-        originalDampening = prb.linearDamping;
-        prb.linearDamping = damping;
+        originalDamping = prb.linearDamping;
+        prb.linearDamping = 0f; // We apply damping manually for fine control
     }
 
     void OnDisable()
     {
         playerAligner.alignToGroundNormal = true;
-        prb.linearDamping = originalDampening;
+        prb.linearDamping = originalDamping;
     }
 
     void Update()
@@ -38,16 +41,31 @@ public class Glider : PlayerAbilityScript
 
     void FixedUpdate()
     {
-        if (prb.linearVelocityY < 0)
+        Vector2 vel = prb.linearVelocity;
+        float dt = Time.fixedDeltaTime;
+
+        // 1. Always lose a tiny bit of velocity (damping)
+        vel *= 1f - damping * dt;
+
+        // 2. Trade height for X velocity - redirect downward motion into forward (wing lift)
+        if (vel.y < 0)
         {
-            float counterForce = glideUpForce;
-            prb.AddForce(counterForce * Vector2.up);
-            prb.AddForce(-prb.linearVelocityY * glideDirectionForce * Vector2.right * playerInfo.DirectionX);
+            float transfer = heightToHorizontalConversion * (-vel.y) * dt;
+            int direction = Mathf.Abs(vel.x) > 0.5f ? (int)Mathf.Sign(vel.x) : playerInfo.DirectionX;
+            vel.x += transfer * direction;
+            vel.y += transfer; // Reduce fall rate - we're redirecting, not adding
         }
-        Debug.Log(prb.linearVelocity);
+
+        // 3. Jellyfish floatiness - cap fall speed for gentle descent
+        if (vel.y < -maxFallSpeed)
+            vel.y = -maxFallSpeed;
+
+        prb.linearVelocity = vel;
+
+        // Visual: tilt based on horizontal speed
         if (!playerInfo.IsGrounded)
             playerAligner.targetAngle = -Mathf.Sign(prb.linearVelocityX) * Mathf.Lerp(0, 30, Mathf.Abs(prb.linearVelocityX) / 30f);
-        
+
         playerAligner.alignToGroundNormal = playerInfo.IsGrounded;
     }
 }
