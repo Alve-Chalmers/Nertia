@@ -560,6 +560,7 @@ GameObject:
   - component: {fileID: 1422672897529917014}
   - component: {fileID: 4685533606517872859}
   - component: {fileID: 2954403831711744922}
+  - component: {fileID: 6450184823619825658}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -714,6 +715,26 @@ MonoBehaviour:
   pi: {fileID: 11400000, guid: 2d3b20cff99313940bbf334a7a7d1b47, type: 2}
   rb: {fileID: 5651467352645874403}
   setPlayerDirFromVel: 1
+--- !u!232 &6450184823619825658
+DistanceJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6534390457413908721}
+  m_Enabled: 0
+  serializedVersion: 4
+  m_EnableCollision: 1
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_BreakAction: 3
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 1
+  m_Distance: 25.730333
+  m_MaxDistanceOnly: 0
 --- !u!1 &7194619381428211079
 GameObject:
   m_ObjectHideFlags: 0
@@ -1052,7 +1073,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   prb: {fileID: 5651467352645874403}
-  playerDistanceJoint: {fileID: 3340859489873221852}
+  playerDistanceJoint: {fileID: 6450184823619825658}
   lineRenderer: {fileID: 1069785539097478684}
 --- !u!1 &9108313235526676316
 GameObject:
