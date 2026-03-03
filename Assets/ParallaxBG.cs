@@ -7,6 +7,9 @@ public class ParallaxBG : MonoBehaviour
     [Tooltip("Per-layer parallax: layer 0 = 0, layer 1 = this, layer 2 = 2×, etc. Higher index = moves more with camera (X).")]
     [SerializeField][Range(0f, 1f)] private float perLayerSpeedOffset = 0.2f;
 
+    [Tooltip("1 = layers follow camera Y; 0 = layers fixed in world (ignore camera Y).")]
+    [SerializeField][Range(0f, 1f)] private float verticalSpeedOffset = 1f;
+
     private Vector2 _cameraStart;
     private float[] _layerOffsetX;
     private float[] _layerOffsetY;
@@ -96,7 +99,9 @@ public class ParallaxBG : MonoBehaviour
             x = WrapHorizontal(x, cameraX, _layerWidth[i]);
 
             float t = (float)(i + 1) / (n + 1);
-            float y = Mathf.Lerp(closestY, yCameraTarget, t);
+            float yFixed = bgNow.y + _layerOffsetY[i];
+            float yCameraFollowing = Mathf.Lerp(closestY, yCameraTarget, t);
+            float y = Mathf.Lerp(yFixed, yCameraFollowing, verticalSpeedOffset);
 
             Transform layer = transform.GetChild(i);
             layer.position = new Vector3(x, y, layer.position.z);
