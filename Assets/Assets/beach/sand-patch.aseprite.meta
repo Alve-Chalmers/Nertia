@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f985b8e72380002428bfc704b398f90a
+guid: 5a18d180ffa09584ea9398b2de22f9dc
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -54,9 +54,9 @@ ScriptedImporter:
     filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
-    wrapW: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
     normalMap: 0
     textureFormat: 0
     maxTextureSize: 0
@@ -78,7 +78,7 @@ ScriptedImporter:
     defaultPivotSpace: 0
     defaultPivotAlignment: 7
     customPivotPosition: {x: 0.5, y: 0.5}
-    mosaicPadding: 0
+    mosaicPadding: 4
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
@@ -91,14 +91,14 @@ ScriptedImporter:
     defaultPivotSpace: 0
     defaultPivotAlignment: 7
     customPivotPosition: {x: 0.5, y: 0.5}
-    mosaicPadding: 0
+    mosaicPadding: 4
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 639081462623843565
+  platformSettingsDirtyTick: 639081490148147414
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -123,19 +123,19 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: sand-bg
+  - name: sand-patch
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: -0.107142866}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
-      x: 0
-      y: 0
-      width: 16
-      height: 16
-    spriteID: 9fa65bb98814e3048afa4bc1d0c91758
+      x: 4
+      y: 4
+      width: 32
+      height: 28
+    spriteID: d4f6a7b588a59784c9ab88e81ca3223a
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -143,30 +143,30 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
+    uvTransform: {x: 4, y: 4}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
     uuid:
-      value0: 2982818844
+      value0: 715841907
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: sand-bg
+    name: sand-patch
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: sand-bg
+    - name: sand-patch
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
         x: 0
-        y: 0
-        width: 16
-        height: 16
-      spriteId: 9fa65bb98814e3048afa4bc1d0c91758
+        y: 3
+        width: 32
+        height: 28
+      spriteId: d4f6a7b588a59784c9ab88e81ca3223a
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -221,5 +221,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 16, y: 16}
-  previousTextureSize: {x: 16, y: 16}
+  canvasSize: {x: 32, y: 32}
+  previousTextureSize: {x: 64, y: 64}
