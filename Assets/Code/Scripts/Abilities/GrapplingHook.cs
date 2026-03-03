@@ -22,7 +22,6 @@ public class GrapplingHook : PlayerAbilityScript
     protected override void OnEnable()
     {
         base.OnEnable();
-        Debug.Log("grp");
 
         RaycastForHook();
         if (hitPoint == null)

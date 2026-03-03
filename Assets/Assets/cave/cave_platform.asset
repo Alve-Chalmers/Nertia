@@ -10,26 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af7181f404f1447c0a7a17b3070b952b, type: 3}
-  m_Name: ground
+  m_Name: cave_platform
   m_EditorClassIdentifier: 
   m_Angles:
-  - m_Start: -60
-    m_End: 60
+  - m_Start: -90
+    m_End: 90
     m_Order: 0
     m_Sprites:
-    - {fileID: -2000184093828470143, guid: 26afdec233930c97db8a7084e614ce8e, type: 3}
-  - m_Start: 60
-    m_End: 300
-    m_Order: 1
-    m_Sprites: []
-  m_FillTexture: {fileID: -8328923581568760697, guid: bf2f3fc1949841adcb1fb26c75fecc1f, type: 3}
+    - {fileID: 6426397047335658526, guid: 5ef552d4a88584c47a35cf4acd153eeb, type: 3}
+  - m_Start: -270
+    m_End: -90
+    m_Order: 0
+    m_Sprites:
+    - {fileID: 6426397047335658526, guid: 5ef552d4a88584c47a35cf4acd153eeb, type: 3}
+    - {fileID: -1819872064126525609, guid: f387af6f9fc450542b4a6f16eb4ef58f, type: 3}
+  m_FillTexture: {fileID: -8328923581568760697, guid: 35db41cd65492fb4d8f9852656f6d858, type: 3}
   m_CornerSprites:
   - m_CornerType: 0
     m_Sprites:
-    - {fileID: -7390365776013692971, guid: fbfbb22727e2b0c0e98943598fb64130, type: 3}
+    - {fileID: 0}
   - m_CornerType: 1
     m_Sprites:
-    - {fileID: 7746184924056040742, guid: bf8819bab1530e3da9923d6af9beebc2, type: 3}
+    - {fileID: 0}
   - m_CornerType: 2
     m_Sprites:
     - {fileID: 0}
