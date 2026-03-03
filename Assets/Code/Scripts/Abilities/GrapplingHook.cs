@@ -22,6 +22,7 @@ public class GrapplingHook : PlayerAbilityScript
     protected override void OnEnable()
     {
         base.OnEnable();
+        pds.setPlayerDirFromVel = false;
 
         RaycastForHook();
         if (hitPoint == null)

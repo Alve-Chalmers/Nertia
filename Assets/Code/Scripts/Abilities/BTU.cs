@@ -5,7 +5,6 @@ using UnityEngine;
 public abstract class BTU : PlayerAbilityScript
 {
     [SerializeField] Rigidbody2D prb;
-    [SerializeField] PlayerDirSetter pds;
     [SerializeField] float force = 10f;
     [SerializeField] float targetSpeed = 5f;
     [SerializeField] float maxSlopeAngle = 50f;
@@ -28,7 +27,7 @@ public abstract class BTU : PlayerAbilityScript
 
     void OnDisable()
     {
-        pds.setPlayerDirFromVel = true;
+        //pds.setPlayerDirFromVel = true;
     }
 
     void Update()
