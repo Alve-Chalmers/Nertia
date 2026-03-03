@@ -41,6 +41,10 @@ public class ParallaxBG : MonoBehaviour
                 CreateCopy(sr, layer, w, 0f);
                 CreateCopy(sr, layer, -w * 2f, 0f);
                 CreateCopy(sr, layer, w * 2f, 0f);
+                CreateCopy(sr, layer, -w * 3f, 0f);
+                CreateCopy(sr, layer, w * 3f, 0f);
+                CreateCopy(sr, layer, -w * 4f, 0f);
+                CreateCopy(sr, layer, w * 4f, 0f);
             }
         }
     }
