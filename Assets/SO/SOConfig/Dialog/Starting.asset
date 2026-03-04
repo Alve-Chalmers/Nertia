@@ -10,15 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94c7008ec2153b94991d631668abaf4e, type: 3}
-  m_Name: SpaceProgramCEORobotAtRocketPlace
+  m_Name: Starting
   m_EditorClassIdentifier: 
   canHaveAgain: 0
   dialogLines:
   - eventToRaiseBefore: {fileID: 0}
-    talkerName: CEO
-    words: What's more important to you? Your mission to get home or this whole planet?
+    talkerName: InternalSystem
+    words: "Warning Warning! \n\nAll levels are critical due to the impact of the
+      crash"
     eventToRaiseAfter: {fileID: 0}
   - eventToRaiseBefore: {fileID: 0}
-    talkerName: CEO
-    words: Please don't take away our only chance of survival!
+    talkerName: InternalSystem
+    words: Follow the emergency protocol with highest priority
+    eventToRaiseAfter: {fileID: 0}
+  - eventToRaiseBefore: {fileID: 0}
+    talkerName: InternalSystem
+    words: 'Do everything you can to return to the mothership immediately! '
     eventToRaiseAfter: {fileID: 0}
