@@ -13,6 +13,7 @@ public class Wheel : PlayerAbilityScript
 
     [Tooltip("Effective rotational inertia when wheel is active. Very low = bearing-like, no braking.")]
     [SerializeField] float wheelInertia = 0.0001f;
+    [SerializeField] AudioSource audioSource;
 
     Vector2 spriteInitialLocalPos;
     Vector3 spriteInitialLocalRot;
@@ -33,11 +34,24 @@ public class Wheel : PlayerAbilityScript
 
         spriteWorldOffset = playerBaseToRotate.position - transform.position;
         currentOffsetDirection = spriteWorldOffset.normalized;
+
+        audioSource.pitch = 1;
+        audioSource.Play();
     }
 
     void FixedUpdate()
     {
         prb.inertia = wheelInertia;
+    }
+
+    void Update()
+    {
+        Debug.Log(Mathf.Abs(prb.angularVelocity));
+        audioSource.pitch = Mathf.SmoothStep(0.7f, 1.3f, Mathf.Abs(prb.angularVelocity) / 2000f);
+        audioSource.volume = Mathf.Clamp01(Mathf.Abs(prb.angularVelocity) / 2000f);
+        if (!playerInfo.IsGrounded) {
+            audioSource.volume *= 0.5f;
+        }
     }
 
     void LateUpdate()
@@ -62,5 +76,6 @@ public class Wheel : PlayerAbilityScript
         playerAligner.align = true;
         prb.rotation = 0;
         playerBaseColliderToDisable.enabled = true;
+        audioSource.Stop();
     }
 }
