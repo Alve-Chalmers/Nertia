@@ -48,9 +48,9 @@ public class Wheel : PlayerAbilityScript
     {
         Debug.Log(Mathf.Abs(prb.angularVelocity));
         audioSource.pitch = Mathf.SmoothStep(0.7f, 1.3f, Mathf.Abs(prb.angularVelocity) / 2000f);
-        audioSource.volume = Mathf.Clamp01(Mathf.Abs(prb.angularVelocity) / 2000f);
+        audioSource.volume = Mathf.Clamp01(Mathf.Abs(prb.angularVelocity) / 3000f);
         if (!playerInfo.IsGrounded) {
-            audioSource.volume *= 0.5f;
+            audioSource.volume *= 0.3f;
         }
     }
 
