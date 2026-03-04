@@ -932,6 +932,7 @@ GameObject:
   - component: {fileID: 4685533606517872859}
   - component: {fileID: 2954403831711744922}
   - component: {fileID: 6450184823619825658}
+  - component: {fileID: 779400307239276550}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1109,6 +1110,27 @@ DistanceJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 25.730333
   m_MaxDistanceOnly: 0
+--- !u!114 &779400307239276550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6534390457413908721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71cc50873836d3249a1e4e1e1b711455, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInfo: {fileID: 11400000, guid: 2d3b20cff99313940bbf334a7a7d1b47, type: 2}
+  castDistance: 15
+  angleToTestAt: 45
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 64
+  hookMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &6588799913978293593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1574,14 +1596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInfo: {fileID: 11400000, guid: 2d3b20cff99313940bbf334a7a7d1b47, type: 2}
   pds: {fileID: 2954403831711744922}
-  castDistance: 18
-  angleToTestAt: 45
-  obstructionMask:
-    serializedVersion: 2
-    m_Bits: 64
-  hookMask:
-    serializedVersion: 2
-    m_Bits: 128
+  detector: {fileID: 779400307239276550}
   prb: {fileID: 5651467352645874403}
   playerDistanceJoint: {fileID: 6450184823619825658}
   lineRenderer: {fileID: 1069785539097478684}
