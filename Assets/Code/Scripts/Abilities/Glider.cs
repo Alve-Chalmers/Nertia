@@ -18,12 +18,15 @@ public class Glider : PlayerAbilityScript
 
     float originalDamping;
 
+    private SpriteRenderer sr;
+
     protected override void OnEnable()
     {
         base.OnEnable();
         playerAligner.alignToGroundNormal = false;
         originalDamping = prb.linearDamping;
         prb.linearDamping = 0f; // We apply damping manually for fine control
+        sr = GetComponentInChildren<SpriteRenderer>();
     }
 
     void OnDisable()
@@ -43,6 +46,12 @@ public class Glider : PlayerAbilityScript
     {
         Vector2 vel = prb.linearVelocity;
         float dt = Time.fixedDeltaTime;
+
+        if (vel.x < 0) {
+            sr.flipX = true;
+        } else {
+            sr.flipX = false;
+        }
 
         // 1. Always lose a tiny bit of velocity (damping)
         vel *= 1f - damping * dt;

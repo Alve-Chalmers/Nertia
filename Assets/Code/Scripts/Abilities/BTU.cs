@@ -11,6 +11,7 @@ public abstract class BTU : PlayerAbilityScript
     [SerializeField] float startingTimeUntilMaxForce = 1f;
     [SerializeField] LayerMask ground;
 
+    [SerializeField] AudioSource audioSource;
 
     protected abstract int Dir {get;}
 
@@ -21,12 +22,15 @@ public abstract class BTU : PlayerAbilityScript
         base.OnEnable();
         pds.setPlayerDirFromVel = false;
         playerInfo.DirectionX = Dir;
+        
+        audioSource.Play();
 
         timeRunning = 0;
     }
 
     void OnDisable()
     {
+        audioSource.Stop();
         //pds.setPlayerDirFromVel = true;
     }
 

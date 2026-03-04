@@ -1,12 +1,15 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class AbilityIcon : MonoBehaviour
 {
-    [SerializeField] Text t;
-
     public void SetData(PlayerAbilityType ability)
     {
-        t.text = ability.ToString();
+        string targetName = ability.ToString();
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Transform child = transform.GetChild(i);
+            Debug.Log(child.name + " " + targetName);
+            child.gameObject.SetActive(child.name == targetName);
+        }
     }
 }
