@@ -13,6 +13,7 @@ public class BoxingGlove : PlayerAbilityScript
 
     [SerializeField] Transform spriteTransform;
     [SerializeField] Animator spriteAnimator;
+    [SerializeField] AudioSource audioSource;
 
     float angle;
 
@@ -28,6 +29,7 @@ public class BoxingGlove : PlayerAbilityScript
         angle = Vector2.SignedAngle(Vector2.up, dir);
         spriteTransform.eulerAngles = new Vector3(0, 0, angle);
         prb.AddForce(-dir * force, ForceMode2D.Impulse);
+        audioSource.Play();
     }
 
     void Update()
