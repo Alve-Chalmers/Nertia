@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.Audio;
 
 [CustomEditor(typeof(SOEvent))]
 public class SOEventEditor : Editor
@@ -96,6 +97,16 @@ public class SOEventConversationEditor : Editor
     {
         DrawDefaultInspector();
         SOEventEditorHelper.DrawRaiseButton<SOEventConversation, Conversation>((SOEventConversation)target);
+    }
+}
+
+[CustomEditor(typeof(SOEventAudioResource))]
+public class SOEventAudioResourceEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+        SOEventEditorHelper.DrawRaiseButton<SOEventAudioResource, AudioResource>((SOEventAudioResource)target);
     }
 }
 
