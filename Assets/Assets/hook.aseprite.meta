@@ -74,7 +74,7 @@ ScriptedImporter:
   previousAsepriteImporterSettings:
     fileImportMode: 1
     importHiddenLayers: 0
-    layerImportMode: 1
+    layerImportMode: 0
     defaultPivotSpace: 0
     defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
@@ -87,7 +87,7 @@ ScriptedImporter:
   asepriteImporterSettings:
     fileImportMode: 1
     importHiddenLayers: 0
-    layerImportMode: 1
+    layerImportMode: 0
     defaultPivotSpace: 0
     defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
@@ -98,7 +98,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 639081554093250520
+  platformSettingsDirtyTick: 639082522240822848
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -123,9 +123,30 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: hook
+  - name: base
     originalName: 
-    pivot: {x: 0.5, y: 0.42857146}
+    pivot: {x: 0.5, y: 0.4285714}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 30
+      y: 4
+      width: 16
+      height: 28
+    spriteID: 99e575fd79f7fa24d963076ca2fc6246
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 30, y: 4}
+  - name: active
+    originalName: 
+    pivot: {x: 0.5, y: 0.37037033}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -133,9 +154,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 16
-      height: 28
-    spriteID: 599b62180b8407c4ab8094c7e8ad8559
+      width: 18
+      height: 27
+    spriteID: fbe4fb2a18c42ef45a06e13f9ba7ea6d
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -148,25 +169,48 @@ ScriptedImporter:
   asepriteLayers:
   - layerIndex: 0
     uuid:
-      value0: 963906375
+      value0: 2328218841
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: hook
-    layerFlags: 0
+    name: base
+    layerFlags: 3
     layerType: 0
     blendMode: 0
     cells:
-    - name: hook
+    - name: base
+      frameIndex: 0
+      additiveSortOrder: 0
+      cellRect:
+        x: 1
+        y: 5
+        width: 16
+        height: 28
+      spriteId: 99e575fd79f7fa24d963076ca2fc6246
+    linkedCells: []
+    parentIndex: -1
+  - layerIndex: 1
+    uuid:
+      value0: 720945496
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: 0
+    name: active
+    layerFlags: 3
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: active
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
         x: 0
-        y: 4
-        width: 16
-        height: 28
-      spriteId: 599b62180b8407c4ab8094c7e8ad8559
+        y: 7
+        width: 18
+        height: 27
+      spriteId: fbe4fb2a18c42ef45a06e13f9ba7ea6d
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -221,5 +265,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 16, y: 32}
-  previousTextureSize: {x: 32, y: 64}
+  canvasSize: {x: 18, y: 34}
+  previousTextureSize: {x: 64, y: 64}
