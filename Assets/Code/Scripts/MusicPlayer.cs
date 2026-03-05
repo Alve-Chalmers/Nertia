@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -10,6 +11,7 @@ public class MusicPlayer : MonoBehaviour
 
     [SerializeField] SOEvent fadeOutMusic;
     [SerializeField] SOEventAudioResource tryPlayMusic;
+    [SerializeField] SOEventBool setMusicLooping;
 
     [SerializeField] float fadeoutTime = 3f;
     [SerializeField] float fadeoutWhenChangingTime = 1f;
@@ -27,6 +29,12 @@ public class MusicPlayer : MonoBehaviour
 
         tryPlayMusic.Subscribe(OnTryPlayMusic);
         fadeOutMusic.Subscribe(OnFadeOutMusic);
+        setMusicLooping.Subscribe(OnSetMusicLooping);
+    }
+
+    void OnSetMusicLooping(bool looping)
+    {
+        audioSource.loop = looping;
     }
 
     void OnTryPlayMusic(AudioResource audioRes)

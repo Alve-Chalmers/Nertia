@@ -110,6 +110,16 @@ public class SOEventAudioResourceEditor : Editor
     }
 }
 
+[CustomEditor(typeof(SOEventAudioResource))]
+public class SOEventBoolEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+        SOEventEditorHelper.DrawRaiseButton<SOEventBool, bool>((SOEventBool)target);
+    }
+}
+
 
 public static class SOEventEditorHelper
 {
@@ -133,3 +143,5 @@ public static class SOEventEditorHelper
         }
     }
 }
+
+
