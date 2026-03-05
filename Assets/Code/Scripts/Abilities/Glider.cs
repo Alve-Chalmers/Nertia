@@ -16,6 +16,8 @@ public class Glider : PlayerAbilityScript
     [SerializeField] Rigidbody2D prb;
     [SerializeField] PlayerAligner playerAligner;
 
+    [SerializeField] AudioSource audioSource;
+
     float originalDamping;
 
     private SpriteRenderer sr;
@@ -27,6 +29,10 @@ public class Glider : PlayerAbilityScript
         originalDamping = prb.linearDamping;
         prb.linearDamping = 0f; // We apply damping manually for fine control
         sr = GetComponentInChildren<SpriteRenderer>();
+        
+        audioSource.volume = Random.Range(0.9f, 1.1f);
+        audioSource.pitch = Random.Range(0.9f, 1.1f);
+        audioSource.Play();
     }
 
     void OnDisable()
