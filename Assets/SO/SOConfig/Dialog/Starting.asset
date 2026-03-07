@@ -15,15 +15,30 @@ MonoBehaviour:
   canHaveAgain: 0
   dialogLines:
   - eventToRaiseBefore: {fileID: 0}
-    talkerName: InternalSystem
-    words: "Warning Warning! \n\nAll levels are critical due to the impact of the
-      crash"
+    talkerName: '[CRITICAL] System message'
+    words: Emergency recovery protocol activating...
     eventToRaiseAfter: {fileID: 0}
   - eventToRaiseBefore: {fileID: 0}
-    talkerName: InternalSystem
-    words: Follow the emergency protocol with highest priority
+    talkerName: RCU Self test
+    words: 'Radio Communication Unit - Status: Inoperable'
     eventToRaiseAfter: {fileID: 0}
   - eventToRaiseBefore: {fileID: 0}
-    talkerName: InternalSystem
-    words: 'Do everything you can to return to the mothership immediately! '
+    talkerName: VCU Self test
+    words: 'Voice Communcation Unit - Status: Degraded'
+    eventToRaiseAfter: {fileID: 0}
+  - eventToRaiseBefore: {fileID: 0}
+    talkerName: BTU Self test
+    words: 'Basic Traversal Unit - Status: Operative'
+    eventToRaiseAfter: {fileID: 0}
+  - eventToRaiseBefore: {fileID: 0}
+    talkerName: '[INFO] System message'
+    words: Querying crash location...
+    eventToRaiseAfter: {fileID: 0}
+  - eventToRaiseBefore: {fileID: 0}
+    talkerName: '[INFO] System message'
+    words: 'Found planet: Nertia, population estimate: 2118'
+    eventToRaiseAfter: {fileID: 0}
+  - eventToRaiseBefore: {fileID: 0}
+    talkerName: '[INFO] System message'
+    words: 'Current objective: Get back to "the mothership"'
     eventToRaiseAfter: {fileID: 0}
