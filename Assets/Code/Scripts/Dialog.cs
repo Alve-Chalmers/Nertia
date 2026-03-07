@@ -8,6 +8,7 @@ public class Dialog : MonoBehaviour
     [SerializeField] GameObject children;
     [SerializeField] SOEventDialogLine showDialogLineEvent;
     [SerializeField] SOEvent hideDialogEvent;
+    [SerializeField] GameObject spacebarPrompt;
 
     void OnEnable()
     {
@@ -29,6 +30,7 @@ public class Dialog : MonoBehaviour
         children.SetActive(true);
         nameText.text = dl.talkerName;
         talkingText.text = dl.words;
+        spacebarPrompt.SetActive(!dl.hideSpacebarPrompt);
     }
 
     void OnHideDialog()

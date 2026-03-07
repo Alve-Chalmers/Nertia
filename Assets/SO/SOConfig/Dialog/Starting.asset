@@ -15,30 +15,47 @@ MonoBehaviour:
   canHaveAgain: 0
   dialogLines:
   - eventToRaiseBefore: {fileID: 0}
+    hideSpacebarPrompt: 1
     talkerName: '[CRITICAL] System message'
-    words: Emergency recovery protocol activating...
+    words: "Emergency recovery \nprotocol activating..."
     eventToRaiseAfter: {fileID: 0}
   - eventToRaiseBefore: {fileID: 0}
-    talkerName: RCU Self test
-    words: 'Radio Communication Unit - Status: Inoperable'
+    hideSpacebarPrompt: 1
+    talkerName: RDU Self test
+    words: 'Radio Dispatch Unit Status:
+
+      Inoperable'
     eventToRaiseAfter: {fileID: 0}
   - eventToRaiseBefore: {fileID: 0}
+    hideSpacebarPrompt: 1
     talkerName: VCU Self test
-    words: 'Voice Communcation Unit - Status: Degraded'
+    words: 'Voice Conversation Unit Status:
+
+      Degraded'
     eventToRaiseAfter: {fileID: 0}
   - eventToRaiseBefore: {fileID: 0}
+    hideSpacebarPrompt: 1
     talkerName: BTU Self test
-    words: 'Basic Traversal Unit - Status: Operative'
+    words: 'Basic Traversal Unit Status:
+
+      Operative'
     eventToRaiseAfter: {fileID: 0}
   - eventToRaiseBefore: {fileID: 0}
+    hideSpacebarPrompt: 1
     talkerName: '[INFO] System message'
     words: Querying crash location...
     eventToRaiseAfter: {fileID: 0}
   - eventToRaiseBefore: {fileID: 0}
+    hideSpacebarPrompt: 1
     talkerName: '[INFO] System message'
-    words: 'Found planet: Nertia, population estimate: 2118'
+    words: 'Found planet: Nertia.
+
+      Population estimate: 2118'
     eventToRaiseAfter: {fileID: 0}
   - eventToRaiseBefore: {fileID: 0}
+    hideSpacebarPrompt: 1
     talkerName: '[INFO] System message'
-    words: 'Current objective: Get back to "the mothership"'
+    words: 'Current objective:
+
+      Get back to "The Mothership"'
     eventToRaiseAfter: {fileID: 0}
