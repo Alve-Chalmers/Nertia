@@ -14,6 +14,7 @@ public class GrappleDetector : MonoBehaviour
     [SerializeField] float angleToTestAt = 45;
     [SerializeField] LayerMask obstructionMask;
     [SerializeField] LayerMask hookMask;
+    [SerializeField] UnlockedAbilities unlockedAbilities;
 
     GrappleHighlight currentHighlight;
 
@@ -49,6 +50,17 @@ public class GrappleDetector : MonoBehaviour
 
     void Update()
     {
+        if (!unlockedAbilities.Abilities.Contains(PlayerAbilityType.GRAPPLING_HOOK))
+        {
+            if (currentHighlight != null)
+            {
+                currentHighlight.SetHighlight(false);
+                currentHighlight = null;
+            }
+            CurrentTarget = default;
+            return;
+        }
+
         GrappleTarget target = Raycast();
         CurrentTarget = target;
 

@@ -29,7 +29,6 @@ public class Player : MonoBehaviour
         pi.Position = transform.position;
         pi.Velocity = prb.linearVelocity;
 
-        Debug.Log(pi.Velocity.magnitude);
 
         UpdateWindAudio();
     }

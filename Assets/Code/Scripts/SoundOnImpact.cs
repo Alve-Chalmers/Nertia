@@ -21,7 +21,6 @@ public class SoundOnImpact : MonoBehaviour
             return;
         }
 
-        Debug.Log(maxImpact * col.relativeVelocity.magnitude);
         audioSource.volume = Mathf.SmoothStep(0.0f, 1.3f, maxImpact * col.relativeVelocity.magnitude / 30f);
         audioSource.pitch = Random.Range(0.8f, 1.2f);
         audioSource.Play();
