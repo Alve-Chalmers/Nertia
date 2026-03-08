@@ -6,6 +6,7 @@ public class PlayerAbilityInputListener : MonoBehaviour
 {
     [SerializeField] protected SOEventPlayerAbilityType useAbility;
     [SerializeField] protected SOEventPlayerAbilityType cancelAbility;
+    [SerializeField] private SOEvent freezePlayerInPlace;
 
     [Serializable]
     public struct AbilityMapping
@@ -39,12 +40,14 @@ public class PlayerAbilityInputListener : MonoBehaviour
 
         useAbility.Subscribe(OnUse);
         cancelAbility.Subscribe(OnCancel);
+        freezePlayerInPlace.Subscribe(OnFreezePlayerInPlace);
     }
 
     private void OnDisable()
     {
         useAbility.Unsubscribe(OnUse);
         cancelAbility.Unsubscribe(OnCancel);
+        freezePlayerInPlace.Unsubscribe(OnFreezePlayerInPlace);
         heldAbilityOrder.Clear();
     }
 
@@ -77,6 +80,11 @@ public class PlayerAbilityInputListener : MonoBehaviour
 
         SetInactive(abilityType);
         TryActivateHeldFallback();
+    }
+
+    private void OnFreezePlayerInPlace()
+    {
+        DeactivateAllAbilities();
     }
 
     private bool TryActivateAbility(PlayerAbilityType requestedAbilityType)
@@ -140,5 +148,16 @@ public class PlayerAbilityInputListener : MonoBehaviour
                 return;
             }
         }
+    }
+
+    private void DeactivateAllAbilities()
+    {
+        foreach (GameObject abilityObject in abilityObjects.Values)
+        {
+            abilityObject.SetActive(false);
+        }
+
+        activeAbilityType = null;
+        heldAbilityOrder.Clear();
     }
 }

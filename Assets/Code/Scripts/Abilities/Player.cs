@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class Player : MonoBehaviour
 {
@@ -57,9 +58,15 @@ public class Player : MonoBehaviour
 
     void OnPlayerDeathRequested() {
         playerAnimator.Play("death");
-        gotoScene.Raise(SceneManager.GetActiveScene().name);
         freezePlayerInPlace.Raise();
+        StartCoroutine(GotoSceneAfterDelay());
         playthroughStats.deaths += 1;
+    }
+
+    IEnumerator GotoSceneAfterDelay()
+    {
+        yield return new WaitForSeconds(0.3f);
+        gotoScene.Raise(SceneManager.GetActiveScene().name);
     }
 
     void OnFreezePlayerInPlace()
