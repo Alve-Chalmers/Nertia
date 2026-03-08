@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6a6543196c908ef8199557b142627999
+guid: 025e9b4c1a610f64ba4e6b345c2157f2
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -74,11 +74,11 @@ ScriptedImporter:
   previousAsepriteImporterSettings:
     fileImportMode: 1
     importHiddenLayers: 0
-    layerImportMode: 0
+    layerImportMode: 1
     defaultPivotSpace: 0
-    defaultPivotAlignment: 7
+    defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
-    mosaicPadding: 4
+    mosaicPadding: 0
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
@@ -87,18 +87,18 @@ ScriptedImporter:
   asepriteImporterSettings:
     fileImportMode: 1
     importHiddenLayers: 0
-    layerImportMode: 0
+    layerImportMode: 1
     defaultPivotSpace: 0
-    defaultPivotAlignment: 7
+    defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
-    mosaicPadding: 4
+    mosaicPadding: 0
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 639072909123038170
+  platformSettingsDirtyTick: 639085191715058291
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -123,19 +123,19 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: 2
+  - name: water-dirt-transition
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: 0.54545456}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
-      x: 332
-      y: 4
-      width: 320
-      height: 417
-    spriteID: 8f563290bc0506344bf839e98eae146c
+      x: 0
+      y: 0
+      width: 32
+      height: 22
+    spriteID: ae0379b9c1c0dc144b9de1220bfedc89
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -143,162 +143,30 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 332, y: 4}
-  - name: 4
-    originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 4
-      width: 320
-      height: 720
-    spriteID: cd3ec1f3fb424244398f83793fa614f5
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 4}
-  - name: 3
-    originalName: 
-    pivot: {x: 0.5, y: -1.7102273}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 332
-      y: 805
-      width: 320
-      height: 176
-    spriteID: 6f22cca87d8dbac408afbe87f5fcfd5a
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 332, y: 805}
-  - name: 1
-    originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 332
-      y: 429
-      width: 320
-      height: 368
-    spriteID: 15b7fb9050925dd48bbc53f19cdb6308
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 332, y: 429}
+    uvTransform: {x: 0, y: 0}
   spriteSheetImportData: []
   asepriteLayers:
-  - layerIndex: 2
-    uuid:
-      value0: 372029328
-      value1: 0
-      value2: 0
-      value3: 0
-    guid: 0
-    name: 2
-    layerFlags: 3
-    layerType: 0
-    blendMode: 0
-    cells:
-    - name: 2
-      frameIndex: 0
-      additiveSortOrder: 0
-      cellRect:
-        x: 0
-        y: 0
-        width: 320
-        height: 417
-      spriteId: 8f563290bc0506344bf839e98eae146c
-    linkedCells: []
-    parentIndex: -1
   - layerIndex: 0
     uuid:
-      value0: 372029322
+      value0: 3257534841
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: 4
-    layerFlags: 3
+    name: water-dirt-transition
+    layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: 4
+    - name: water-dirt-transition
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
         x: 0
-        y: 0
-        width: 320
-        height: 720
-      spriteId: cd3ec1f3fb424244398f83793fa614f5
-    linkedCells: []
-    parentIndex: -1
-  - layerIndex: 1
-    uuid:
-      value0: 372029327
-      value1: 0
-      value2: 0
-      value3: 0
-    guid: 0
-    name: 3
-    layerFlags: 3
-    layerType: 0
-    blendMode: 0
-    cells:
-    - name: 3
-      frameIndex: 0
-      additiveSortOrder: 0
-      cellRect:
-        x: 0
-        y: 301
-        width: 320
-        height: 176
-      spriteId: 6f22cca87d8dbac408afbe87f5fcfd5a
-    linkedCells: []
-    parentIndex: -1
-  - layerIndex: 3
-    uuid:
-      value0: 372029325
-      value1: 0
-      value2: 0
-      value3: 0
-    guid: 0
-    name: 1
-    layerFlags: 3
-    layerType: 0
-    blendMode: 0
-    cells:
-    - name: 1
-      frameIndex: 0
-      additiveSortOrder: 0
-      cellRect:
-        x: 0
-        y: 0
-        width: 320
-        height: 368
-      spriteId: 15b7fb9050925dd48bbc53f19cdb6308
+        y: 4
+        width: 32
+        height: 22
+      spriteId: ae0379b9c1c0dc144b9de1220bfedc89
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -353,5 +221,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 320, y: 720}
-  previousTextureSize: {x: 1024, y: 1024}
+  canvasSize: {x: 32, y: 32}
+  previousTextureSize: {x: 32, y: 32}

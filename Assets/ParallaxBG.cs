@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 [ExecuteInEditMode]
 public class ParallaxBG : MonoBehaviour
@@ -11,45 +12,82 @@ public class ParallaxBG : MonoBehaviour
     [SerializeField][Range(0f, 1f)] private float verticalSpeedOffset = 1f;
 
     private Vector2 _cameraStart;
-    private float[] _layerOffsetX;
-    private float[] _layerOffsetY;
-    private float[] _layerWidth;
+    private Layer[] _layers;
+
+    private struct Layer
+    {
+        public Transform Transform;
+        public int SortingOrder;
+        public int SiblingIndex;
+        public float OffsetX;
+        public float OffsetY;
+        public float Width;
+    }
 
     void Start()
+    {
+        RebuildLayerCache();
+    }
+
+    void OnEnable()
+    {
+        RebuildLayerCache();
+    }
+
+    void OnTransformChildrenChanged()
+    {
+        RebuildLayerCache();
+    }
+
+    void RebuildLayerCache()
     {
         if (cameraTransform == null) return;
 
         _cameraStart = cameraTransform.position;
         Vector2 bgStart = transform.position;
         int n = transform.childCount;
-        _layerOffsetX = new float[n];
-        _layerOffsetY = new float[n];
-        _layerWidth = new float[n];
+        _layers = new Layer[n];
 
         for (int i = 0; i < n; i++)
         {
-            Transform layer = transform.GetChild(i);
-            ClearLayerCopies(layer);
+            Transform layerTransform = transform.GetChild(i);
+            ClearLayerCopies(layerTransform);
 
-            SpriteRenderer sr = layer.GetComponent<SpriteRenderer>();
+            SpriteRenderer sr = layerTransform.GetComponent<SpriteRenderer>();
             float wRaw = sr != null ? sr.bounds.size.x : 10f;
-            _layerWidth[i] = Mathf.Max(0.001f, wRaw);
-            _layerOffsetX[i] = layer.position.x - bgStart.x;
-            _layerOffsetY[i] = layer.position.y - bgStart.y;
+            float width = Mathf.Max(0.001f, wRaw);
+            _layers[i] = new Layer
+            {
+                Transform = layerTransform,
+                SortingOrder = sr != null ? sr.sortingOrder : 0,
+                SiblingIndex = i,
+                OffsetX = layerTransform.position.x - bgStart.x,
+                OffsetY = layerTransform.position.y - bgStart.y,
+                Width = width
+            };
 
             if (sr != null)
             {
-                float w = _layerWidth[i];
-                CreateCopy(sr, layer, -w, 0f);
-                CreateCopy(sr, layer, w, 0f);
-                CreateCopy(sr, layer, -w * 2f, 0f);
-                CreateCopy(sr, layer, w * 2f, 0f);
-                CreateCopy(sr, layer, -w * 3f, 0f);
-                CreateCopy(sr, layer, w * 3f, 0f);
-                CreateCopy(sr, layer, -w * 4f, 0f);
-                CreateCopy(sr, layer, w * 4f, 0f);
+                float w = width;
+                CreateCopy(sr, layerTransform, -w, 0f);
+                CreateCopy(sr, layerTransform, w, 0f);
+                CreateCopy(sr, layerTransform, -w * 2f, 0f);
+                CreateCopy(sr, layerTransform, w * 2f, 0f);
+                CreateCopy(sr, layerTransform, -w * 3f, 0f);
+                CreateCopy(sr, layerTransform, w * 3f, 0f);
+                CreateCopy(sr, layerTransform, -w * 4f, 0f);
+                CreateCopy(sr, layerTransform, w * 4f, 0f);
             }
         }
+
+        Array.Sort(_layers, CompareLayers);
+    }
+
+    static int CompareLayers(Layer a, Layer b)
+    {
+        int sortingComparison = b.SortingOrder.CompareTo(a.SortingOrder);
+        if (sortingComparison != 0) return sortingComparison;
+        return a.SiblingIndex.CompareTo(b.SiblingIndex);
     }
 
     static void ClearLayerCopies(Transform layer)
@@ -82,29 +120,30 @@ public class ParallaxBG : MonoBehaviour
     void Update()
     {
         if (cameraTransform == null) return;
-        int n = _layerOffsetX?.Length ?? 0;
+        int n = _layers?.Length ?? 0;
         if (n == 0) return;
 
         float cameraX = cameraTransform.position.x;
         float cameraY = cameraTransform.position.y;
         float dx = cameraX - _cameraStart.x;
         Vector2 bgNow = transform.position;
-        float closestY = n > 0 ? bgNow.y + _layerOffsetY[n - 1] : bgNow.y;
+        float closestY = bgNow.y + _layers[n - 1].OffsetY;
         float yCameraTarget = cameraY + (bgNow.y - _cameraStart.y);
 
         for (int i = 0; i < n; i++)
         {
+            Layer layer = _layers[i];
             float parallax = i * perLayerSpeedOffset;
-            float x = bgNow.x + _layerOffsetX[i] + dx * parallax;
-            x = WrapHorizontal(x, cameraX, _layerWidth[i]);
+
+            float x = bgNow.x + layer.OffsetX + dx * parallax;
+            x = WrapHorizontal(x, cameraX, layer.Width);
 
             float t = (float)(i + 1) / (n + 1);
-            float yFixed = bgNow.y + _layerOffsetY[i];
+            float yFixed = bgNow.y + layer.OffsetY;
             float yCameraFollowing = Mathf.Lerp(closestY, yCameraTarget, t);
             float y = Mathf.Lerp(yFixed, yCameraFollowing, verticalSpeedOffset);
 
-            Transform layer = transform.GetChild(i);
-            layer.position = new Vector3(x, y, layer.position.z);
+            layer.Transform.position = new Vector3(x, y, layer.Transform.position.z);
         }
     }
 
