@@ -15,17 +15,24 @@ public class Pauser : MonoBehaviour
     {
         pauseAction = InputSystem.actions.FindAction("Pause");
         pauseAction.performed += OnPauseInput;
+        setPause.Subscribe(OnPaused);
     }
 
     void OnDisable()
     {
         pauseAction.performed -= OnPauseInput;
+        setPause.Unsubscribe(OnPaused);
     }
 
     void OnPauseInput(InputAction.CallbackContext _)
     {
         isPaused = !isPaused;
         setPause.Raise(isPaused);
+    }
+
+    void OnPaused(bool paused)
+    {
+        isPaused = paused;
         Time.timeScale = isPaused ? 0 : 1;
 
         if (fadeCoroutine != null)
