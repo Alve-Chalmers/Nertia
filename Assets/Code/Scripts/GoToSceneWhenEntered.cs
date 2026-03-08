@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GoToSceneWhenEntered : MonoBehaviour
 {
@@ -9,6 +8,9 @@ public class GoToSceneWhenEntered : MonoBehaviour
 
     [SerializeField] ListOfAbilities abilitiesRequired;
     [SerializeField] UnlockedAbilities unlockedAbilities;
+    [SerializeField] SOEventString gotoSceneEvent;
+    [SerializeField] SOEvent freezePlayerInPlace;
+
 
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -26,6 +28,7 @@ public class GoToSceneWhenEntered : MonoBehaviour
             }
         }
 
-        SceneManager.LoadScene(sceneToGoTo);
+        freezePlayerInPlace.Raise();
+        gotoSceneEvent.Raise(sceneToGoTo);
     }
 }
