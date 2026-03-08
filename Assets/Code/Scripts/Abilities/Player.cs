@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] SOEvent outsideCameraEvent;
 
     [SerializeField] AudioSource windAudio;
+    [SerializeField] SOEvent freezePlayerInPlace;
 
     void Awake()
     {
@@ -18,10 +19,12 @@ public class Player : MonoBehaviour
     void OnEnable()
     {
         outsideCameraEvent.Subscribe(OnPlayerDeathRequested);
+        freezePlayerInPlace.Subscribe(OnFreezePlayerInPlace);
     }
     void OnDisable()
     {
         outsideCameraEvent.Unsubscribe(OnPlayerDeathRequested);
+        freezePlayerInPlace.Unsubscribe(OnFreezePlayerInPlace);
     }
 
     void Update()
@@ -50,5 +53,12 @@ public class Player : MonoBehaviour
 
     void OnPlayerDeathRequested() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    void OnFreezePlayerInPlace()
+    {
+        prb.linearVelocity = Vector2.zero;
+        prb.angularVelocity = 0f;
+        prb.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 }
