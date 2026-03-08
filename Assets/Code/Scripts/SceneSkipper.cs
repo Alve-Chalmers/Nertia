@@ -2,10 +2,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class GoToScene : MonoBehaviour
+public class SceneSkipper : MonoBehaviour
 {
     [SerializeField] private InputActionReference nextSceneAction;
     [SerializeField] private InputActionReference prevSceneAction;
+
+    [SerializeField] SOEventString gotoScene;
 
     private int maxBuildIndex;
 
@@ -40,7 +42,12 @@ public class GoToScene : MonoBehaviour
         int current = SceneManager.GetActiveScene().buildIndex;
         int target  = Mathf.Clamp(current + offset, 0, maxBuildIndex);
 
-        if (target != current)
-            SceneManager.LoadScene(target);
+        if (target == current)
+            return;
+
+        string scenePath = SceneUtility.GetScenePathByBuildIndex(target);
+        string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
+
+        gotoScene.Raise(sceneName);
     }
 }
