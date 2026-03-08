@@ -22,9 +22,14 @@ public class LevelTransition : MonoBehaviour
 
     void OnGotoScene(string scene)
     {
+        if (scene == SceneManager.GetActiveScene().name) {
+            animator.Play("LevelTransitionReset");
+        }
+        else {
+            animator.Play("LevelTransitionExit");
+        }
         asyncLoad = SceneManager.LoadSceneAsync(scene);
         asyncLoad.allowSceneActivation = false;
-        animator.Play("LevelTransitionExit");
     }
 
     void LoadTheScene() {
