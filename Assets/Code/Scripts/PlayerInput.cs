@@ -10,6 +10,7 @@ public class PlayerInput : MonoBehaviour
 
     [Header("")]
     [SerializeField] UnlockedAbilities unlockedAbilities;
+    [SerializeField] SOEventBool paused;
 
 
     private static readonly Dictionary<string, PlayerAbilityType> abilityDict = new() 
@@ -41,6 +42,8 @@ public class PlayerInput : MonoBehaviour
                 action.canceled += OnActionCanceled;
             }
         }
+
+        paused.Subscribe(OnPause);
     }
 
     private void OnDisable()
@@ -58,10 +61,14 @@ public class PlayerInput : MonoBehaviour
                 action.canceled -= OnActionCanceled;
             }
         }
+
+        paused.Unsubscribe(OnPause);
     }
 
     private void OnActionPerformed(InputAction.CallbackContext ctx)
     {
+        if (Time.timeScale == 0) return;
+
         if (ctx.action != null && abilityDict.TryGetValue(ctx.action.name, out var abilityType))
         {
             if (unlockedAbilities.Abilities.Contains(abilityType))
@@ -71,10 +78,21 @@ public class PlayerInput : MonoBehaviour
 
     private void OnActionCanceled(InputAction.CallbackContext ctx)
     {
+        if (Time.timeScale == 0) return;
+
         if (ctx.action != null && abilityDict.TryGetValue(ctx.action.name, out var abilityType))
         {
             if (unlockedAbilities.Abilities.Contains(abilityType))
                 cancelAbility.Raise(abilityType);
+        }
+    }
+
+    void OnPause(bool paused) {
+        if (!paused) {
+            foreach (var a in abilityDict.Values)
+            {
+                cancelAbility.Raise(a);
+            }
         }
     }
 }
