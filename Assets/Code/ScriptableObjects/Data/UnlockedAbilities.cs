@@ -6,7 +6,7 @@ public class UnlockedAbilities : ScriptableObject
 {
     [SerializeField] ListOfAbilities defaultAbilities;
 
-    private HashSet<PlayerAbilityType> _unlockedAbilities = null;
+    [ShowInPlayMode] private HashSet<PlayerAbilityType> _unlockedAbilities = null;
 
     public HashSet<PlayerAbilityType> Abilities
     {

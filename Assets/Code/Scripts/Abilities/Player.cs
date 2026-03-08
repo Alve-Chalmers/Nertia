@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] AudioSource windAudio;
     [SerializeField] SOEvent freezePlayerInPlace;
     [SerializeField] SOEventString gotoScene;
+    [SerializeField] PlaythroughStats playthroughStats;
     [SerializeField] Animator playerAnimator;
 
     void Awake()
@@ -34,6 +35,7 @@ public class Player : MonoBehaviour
         pi.Position = transform.position;
         pi.Velocity = prb.linearVelocity;
 
+        playthroughStats.time += Time.deltaTime;
 
         UpdateWindAudio();
     }
@@ -57,6 +59,7 @@ public class Player : MonoBehaviour
         playerAnimator.Play("death");
         gotoScene.Raise(SceneManager.GetActiveScene().name);
         freezePlayerInPlace.Raise();
+        playthroughStats.deaths += 1;
     }
 
     void OnFreezePlayerInPlace()

@@ -123,13 +123,24 @@ public class SOEventAudioResourceEditor : Editor
     }
 }
 
-[CustomEditor(typeof(SOEventAudioResource))]
+[CustomEditor(typeof(SOEventBool))]
 public class SOEventBoolEditor : Editor
 {
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
         SOEventEditorHelper.DrawRaiseButton<SOEventBool, bool>((SOEventBool)target);
+        SOEventEditorHelper.DrawReferences(target);
+    }
+}
+
+[CustomEditor(typeof(SOEventVector2))]
+public class SOEventVector2Editor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+        SOEventEditorHelper.DrawRaiseButton<SOEventVector2, Vector2>((SOEventVector2)target);
         SOEventEditorHelper.DrawReferences(target);
     }
 }
