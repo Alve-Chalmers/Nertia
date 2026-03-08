@@ -8,12 +8,17 @@ public class GrapplingHook : PlayerAbilityScript
     [SerializeField] Rigidbody2D prb;
     [SerializeField] DistanceJoint2D playerDistanceJoint;
     [SerializeField] LineRenderer lineRenderer;
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioSource audioSource2;
 
     GrappleTarget target;
 
     protected override void OnEnable()
     {
         base.OnEnable();
+
+        audioSource.Play();
+
         pds.setPlayerDirFromVel = false;
 
         target = detector.Raycast();
@@ -33,6 +38,8 @@ public class GrapplingHook : PlayerAbilityScript
         playerDistanceJoint.distance = Vector2.Distance(transform.position, target.HitPoint.Value);
         playerDistanceJoint.maxDistanceOnly = true;
         playerDistanceJoint.enabled = true;
+
+        audioSource2.Play();
     }
 
     void OnDisable()
