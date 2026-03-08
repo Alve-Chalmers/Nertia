@@ -9,11 +9,16 @@ public class SceneSkipper : MonoBehaviour
 
     [SerializeField] SOEventString gotoScene;
 
+    [SerializeField] SceneField firstScene;
+    [SerializeField] SceneField lastScene;
+
+    private int minBuildIndex;
     private int maxBuildIndex;
 
     private void Awake()
     {
-        maxBuildIndex = SceneManager.sceneCountInBuildSettings - 3;
+        minBuildIndex = GetBuildIndex(firstScene);
+        maxBuildIndex = GetBuildIndex(lastScene);
     }
 
     private void OnEnable()
@@ -40,14 +45,25 @@ public class SceneSkipper : MonoBehaviour
     private void ChangeScene(int offset)
     {
         int current = SceneManager.GetActiveScene().buildIndex;
-        int target  = Mathf.Clamp(current + offset, 0, maxBuildIndex);
+        int targetIndex = Mathf.Clamp(current + offset, minBuildIndex, maxBuildIndex);
 
-        if (target == current)
+        if (targetIndex == current)
             return;
 
-        string scenePath = SceneUtility.GetScenePathByBuildIndex(target);
+        string scenePath = SceneUtility.GetScenePathByBuildIndex(targetIndex);
         string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
 
         gotoScene.Raise(sceneName);
+    }
+
+    private static int GetBuildIndex(string sceneName)
+    {
+        for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+        {
+            string path = SceneUtility.GetScenePathByBuildIndex(i);
+            if (System.IO.Path.GetFileNameWithoutExtension(path) == sceneName)
+                return i;
+        }
+        return -1;
     }
 }
