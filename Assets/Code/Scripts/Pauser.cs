@@ -26,19 +26,19 @@ public class Pauser : MonoBehaviour
     {
         isPaused = !isPaused;
         setPause.Raise(isPaused);
+        Time.timeScale = isPaused ? 0 : 1;
 
         if (fadeCoroutine != null)
             StopCoroutine(fadeCoroutine);
 
         if (isPaused)
-            fadeCoroutine = StartCoroutine(FadeOut());
+            fadeCoroutine = StartCoroutine(FadeOutAudio());
         else
-            fadeCoroutine = StartCoroutine(FadeIn());
+            fadeCoroutine = StartCoroutine(FadeInAudio());
     }
 
-    IEnumerator FadeOut()
+    IEnumerator FadeOutAudio()
     {
-        Time.timeScale = 0f;
         float start = AudioListener.volume;
         for (float t = 0f; t < fadeDuration; t += Time.unscaledDeltaTime)
         {
@@ -49,10 +49,9 @@ public class Pauser : MonoBehaviour
         AudioListener.pause = true;
     }
 
-    IEnumerator FadeIn()
+    IEnumerator FadeInAudio()
     {
         AudioListener.pause = false;
-        Time.timeScale = 1f;
         float start = AudioListener.volume;
         for (float t = 0f; t < fadeDuration; t += Time.unscaledDeltaTime)
         {
