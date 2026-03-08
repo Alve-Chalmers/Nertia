@@ -133,7 +133,7 @@ public class ParallaxBG : MonoBehaviour
         for (int i = 0; i < n; i++)
         {
             Layer layer = _layers[i];
-            float parallax = i * perLayerSpeedOffset;
+            float parallax = (i+1) * perLayerSpeedOffset;
 
             float x = bgNow.x + layer.OffsetX + dx * parallax;
             x = WrapHorizontal(x, cameraX, layer.Width);
