@@ -5,10 +5,11 @@ public class Player : MonoBehaviour
 {
     [SerializeField] PlayerInfo pi;
     [SerializeField] Rigidbody2D prb;
-    [SerializeField] SOEvent outsideCameraEvent;
+    [SerializeField] SOEvent playerShouldDie;
 
     [SerializeField] AudioSource windAudio;
     [SerializeField] SOEvent freezePlayerInPlace;
+    [SerializeField] SOEventString gotoScene;
 
     void Awake()
     {
@@ -18,12 +19,12 @@ public class Player : MonoBehaviour
 
     void OnEnable()
     {
-        outsideCameraEvent.Subscribe(OnPlayerDeathRequested);
+        playerShouldDie.Subscribe(OnPlayerDeathRequested);
         freezePlayerInPlace.Subscribe(OnFreezePlayerInPlace);
     }
     void OnDisable()
     {
-        outsideCameraEvent.Unsubscribe(OnPlayerDeathRequested);
+        playerShouldDie.Unsubscribe(OnPlayerDeathRequested);
         freezePlayerInPlace.Unsubscribe(OnFreezePlayerInPlace);
     }
 
@@ -52,7 +53,8 @@ public class Player : MonoBehaviour
     }
 
     void OnPlayerDeathRequested() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        gotoScene.Raise(SceneManager.GetActiveScene().name);
+        freezePlayerInPlace.Raise();
     }
 
     void OnFreezePlayerInPlace()
