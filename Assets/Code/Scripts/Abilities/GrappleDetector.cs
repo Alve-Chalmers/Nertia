@@ -17,6 +17,7 @@ public class GrappleDetector : MonoBehaviour
     [SerializeField] UnlockedAbilities unlockedAbilities;
 
     GrappleHighlight currentHighlight;
+    GrappleHighlight currentlyHookedHighlight;
 
     public GrappleTarget CurrentTarget { get; private set; }
 
@@ -57,6 +58,13 @@ public class GrappleDetector : MonoBehaviour
                 currentHighlight.SetHighlight(false);
                 currentHighlight = null;
             }
+
+            if (currentlyHookedHighlight != null)
+            {
+                currentlyHookedHighlight.SetHooked(false);
+                currentlyHookedHighlight = null;
+            }
+
             CurrentTarget = default;
             return;
         }
@@ -81,10 +89,15 @@ public class GrappleDetector : MonoBehaviour
     void OnDisable()
     {
         if (currentHighlight != null)
-        {
             currentHighlight.SetHighlight(false);
-            currentHighlight = null;
+
+        if (currentlyHookedHighlight != null)
+        {
+            currentlyHookedHighlight.SetHooked(false);
+            currentlyHookedHighlight = null;
         }
+
+        currentHighlight = null;
     }
 
     void OnDrawGizmos()
@@ -96,5 +109,27 @@ public class GrappleDetector : MonoBehaviour
         dir.x *= playerInfo.DirectionX;
         Gizmos.color = Color.green;
         Gizmos.DrawLine(playerInfo.Position, playerInfo.Position + dir.normalized * castDistance);
+    }
+
+    public void SetHooked(bool hooked)
+    {
+        if (hooked)
+        {
+            if (currentHighlight == null)
+                return;
+
+            if (currentlyHookedHighlight != null && currentlyHookedHighlight != currentHighlight)
+                currentlyHookedHighlight.SetHooked(false);
+
+            currentlyHookedHighlight = currentHighlight;
+            currentlyHookedHighlight.SetHooked(true);
+            return;
+        }
+
+        if (currentlyHookedHighlight != null)
+        {
+            currentlyHookedHighlight.SetHooked(false);
+            currentlyHookedHighlight = null;
+        }
     }
 }

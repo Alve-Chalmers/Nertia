@@ -83,6 +83,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 7953708320075295017}
+  hookSR: {fileID: 417838543628332187}
 --- !u!1001 &5530491540968045648
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91,6 +92,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2516956431317718241}
     m_Modifications:
+    - target: {fileID: -7056565546274339954, guid: 9ab7c31d3983c1d4a81ab268cc5b6846, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -5266603953098335206, guid: 9ab7c31d3983c1d4a81ab268cc5b6846, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -104,6 +109,10 @@ PrefabInstance:
       value: hook
       objectReference: {fileID: 0}
     - target: {fileID: 2495415661616682361, guid: 9ab7c31d3983c1d4a81ab268cc5b6846, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5263640545751535819, guid: 9ab7c31d3983c1d4a81ab268cc5b6846, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
@@ -152,6 +161,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: -8435245712485981826, guid: 9ab7c31d3983c1d4a81ab268cc5b6846, type: 3}
+--- !u!212 &417838543628332187 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 5263640545751535819, guid: 9ab7c31d3983c1d4a81ab268cc5b6846, type: 3}
+  m_PrefabInstance: {fileID: 5530491540968045648}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2420057111104553821 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7878350319992209165, guid: 9ab7c31d3983c1d4a81ab268cc5b6846, type: 3}

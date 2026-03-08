@@ -3,6 +3,7 @@ using UnityEngine;
 public class GrappleHighlight : MonoBehaviour
 {
     [SerializeField] SpriteRenderer sr;
+    [SerializeField] SpriteRenderer hookSR;
 
     void Start()
     {
@@ -13,5 +14,11 @@ public class GrappleHighlight : MonoBehaviour
     {
         if (sr != null)
             sr.enabled = highlight;
+    }
+
+    public void SetHooked(bool hooked)
+    {
+        if (hookSR != null)
+            hookSR.enabled = hooked;
     }
 }
