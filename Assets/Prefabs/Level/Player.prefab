@@ -1449,6 +1449,7 @@ GameObject:
   - component: {fileID: 2954403831711744922}
   - component: {fileID: 6450184823619825658}
   - component: {fileID: 779400307239276550}
+  - component: {fileID: 8211099101261822193}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1656,6 +1657,21 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   unlockedAbilities: {fileID: 11400000, guid: 32305d4e646ade448a1dff0bdd83f210, type: 2}
+--- !u!114 &8211099101261822193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6534390457413908721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14556df06cf14174396457f58ffda73b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextSceneAction: {fileID: 8776171415879822161, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  prevSceneAction: {fileID: -7138045437007795555, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  gotoScene: {fileID: 11400000, guid: c3249f1ab187a054fb68f0c7ea37ec30, type: 2}
 --- !u!1 &6588799913978293593
 GameObject:
   m_ObjectHideFlags: 0
