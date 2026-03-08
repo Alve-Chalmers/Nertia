@@ -10,6 +10,8 @@ public class LevelTransition : MonoBehaviour
 
     AsyncOperation asyncLoad;
 
+    bool isTransitioning = false;
+
     void OnEnable()
     {
         gotoScene.Subscribe(OnGotoScene);
@@ -22,6 +24,9 @@ public class LevelTransition : MonoBehaviour
 
     void OnGotoScene(string scene)
     {
+        if (isTransitioning)
+            return;
+        isTransitioning = true;
         if (scene == SceneManager.GetActiveScene().name) {
             animator.Play("LevelTransitionReset");
         }
@@ -33,6 +38,7 @@ public class LevelTransition : MonoBehaviour
     }
 
     void LoadTheScene() {
+        isTransitioning = false;
         asyncLoad.allowSceneActivation = true;
     }
 }
