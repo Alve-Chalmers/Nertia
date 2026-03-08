@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9ab7c31d3983c1d4a81ab268cc5b6846
+guid: b557bc4f16ca5b04c9c0b28842a91566
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ ScriptedImporter:
     sRGBTexture: 1
     spriteMode: 2
     spriteExtrude: 1
-    spriteMeshType: 1
+    spriteMeshType: 0
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
     spritePixelsToUnits: 16
@@ -54,9 +54,9 @@ ScriptedImporter:
     filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
     normalMap: 0
     textureFormat: 0
     maxTextureSize: 0
@@ -74,11 +74,11 @@ ScriptedImporter:
   previousAsepriteImporterSettings:
     fileImportMode: 1
     importHiddenLayers: 0
-    layerImportMode: 0
+    layerImportMode: 1
     defaultPivotSpace: 0
-    defaultPivotAlignment: 0
+    defaultPivotAlignment: 7
     customPivotPosition: {x: 0.5, y: 0.5}
-    mosaicPadding: 4
+    mosaicPadding: 0
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
@@ -87,18 +87,18 @@ ScriptedImporter:
   asepriteImporterSettings:
     fileImportMode: 1
     importHiddenLayers: 0
-    layerImportMode: 0
+    layerImportMode: 1
     defaultPivotSpace: 0
-    defaultPivotAlignment: 0
+    defaultPivotAlignment: 7
     customPivotPosition: {x: 0.5, y: 0.5}
-    mosaicPadding: 4
+    mosaicPadding: 0
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 639082522240822848
+  platformSettingsDirtyTick: 639086044963879472
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -123,19 +123,19 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: base
+  - name: grappler-rope
     originalName: 
-    pivot: {x: 0.5, y: 0.60714287}
+    pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
-      x: 30
-      y: 4
+      x: 0
+      y: 0
       width: 16
-      height: 28
-    spriteID: 99e575fd79f7fa24d963076ca2fc6246
+      height: 4
+    spriteID: 06eddebbfccb79d478776253530ae5eb
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -143,118 +143,30 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 30, y: 4}
-  - name: active
-    originalName: 
-    pivot: {x: 0.5, y: 0.5555556}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 4
-      width: 18
-      height: 27
-    spriteID: fbe4fb2a18c42ef45a06e13f9ba7ea6d
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 4}
-  - name: hooked
-    originalName: 
-    pivot: {x: 0.5, y: 0.3125}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 39
-      width: 16
-      height: 16
-    spriteID: c660622e63c1cb2488f20603b2619f88
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 39}
+    uvTransform: {x: 0, y: 0}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
     uuid:
-      value0: 2328218841
+      value0: 2327389336
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: base
-    layerFlags: 3
+    name: grappler-rope
+    layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: base
+    - name: grappler-rope
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 10
-        y: 22
+        x: 0
+        y: 0
         width: 16
-        height: 28
-      spriteId: 99e575fd79f7fa24d963076ca2fc6246
-    linkedCells: []
-    parentIndex: -1
-  - layerIndex: 1
-    uuid:
-      value0: 720945496
-      value1: 0
-      value2: 0
-      value3: 0
-    guid: 0
-    name: active
-    layerFlags: 3
-    layerType: 0
-    blendMode: 0
-    cells:
-    - name: active
-      frameIndex: 0
-      additiveSortOrder: 0
-      cellRect:
-        x: 9
-        y: 24
-        width: 18
-        height: 27
-      spriteId: fbe4fb2a18c42ef45a06e13f9ba7ea6d
-    linkedCells: []
-    parentIndex: -1
-  - layerIndex: 2
-    uuid:
-      value0: 3733710720
-      value1: 0
-      value2: 0
-      value3: 0
-    guid: 0
-    name: hooked
-    layerFlags: 3
-    layerType: 0
-    blendMode: 0
-    cells:
-    - name: hooked
-      frameIndex: 0
-      additiveSortOrder: 0
-      cellRect:
-        x: 10
-        y: 34
-        width: 16
-        height: 16
-      spriteId: c660622e63c1cb2488f20603b2619f88
+        height: 4
+      spriteId: 06eddebbfccb79d478776253530ae5eb
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -309,5 +221,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 36, y: 68}
-  previousTextureSize: {x: 64, y: 64}
+  canvasSize: {x: 16, y: 4}
+  previousTextureSize: {x: 16, y: 4}

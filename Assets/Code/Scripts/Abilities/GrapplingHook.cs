@@ -29,7 +29,10 @@ public class GrapplingHook : PlayerAbilityScript
         lineRenderer.SetPosition(1, target.HitPoint.Value);
 
         if (!target.HitHook)
+        {
+            detector.SetHooked(false);
             return;
+        }
 
         prb.rotation = 0;
         prb.freezeRotation = false;
@@ -47,6 +50,7 @@ public class GrapplingHook : PlayerAbilityScript
         prb.rotation = 0;
         prb.freezeRotation = true;
         playerDistanceJoint.enabled = false;
+        detector.SetHooked(false);
     }
 
     void Update()
@@ -55,6 +59,7 @@ public class GrapplingHook : PlayerAbilityScript
         if (target.HitPoint != null && target.HitHook)
         {
             lineRenderer.SetPosition(1, target.HitPoint.Value);
+            detector.SetHooked(true);
             float currentDist = Vector2.Distance(transform.position, target.HitPoint.Value);
             if (currentDist < playerDistanceJoint.distance)
                 playerDistanceJoint.distance = currentDist;
@@ -62,6 +67,7 @@ public class GrapplingHook : PlayerAbilityScript
         else
         {
             lineRenderer.SetPosition(1, (Vector2)transform.position + detector.GetHookVec());
+            detector.SetHooked(false);
         }
     }
 }
