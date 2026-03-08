@@ -6,12 +6,12 @@ public class PauseScreen : MonoBehaviour
     [SerializeField] GameObject thingsToHide;
 
 
-    void Awake()
+    void OnEnable()
     {
         setPause.Subscribe(OnPause);
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
         setPause.Unsubscribe(OnPause);
     }
