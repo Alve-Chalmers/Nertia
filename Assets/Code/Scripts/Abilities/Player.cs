@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] AudioSource windAudio;
     [SerializeField] SOEvent freezePlayerInPlace;
     [SerializeField] SOEventString gotoScene;
+    [SerializeField] Animator playerAnimator;
 
     void Awake()
     {
@@ -53,6 +54,7 @@ public class Player : MonoBehaviour
     }
 
     void OnPlayerDeathRequested() {
+        playerAnimator.Play("death");
         gotoScene.Raise(SceneManager.GetActiveScene().name);
         freezePlayerInPlace.Raise();
     }
