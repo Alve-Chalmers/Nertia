@@ -12,6 +12,7 @@ public class GrapplingHook : PlayerAbilityScript
     [SerializeField] AudioSource audioSource2;
 
     GrappleTarget target;
+    GrappleHighlight hookedHighlight;
 
     protected override void OnEnable()
     {
@@ -22,6 +23,10 @@ public class GrapplingHook : PlayerAbilityScript
         pds.setPlayerDirFromVel = false;
 
         target = detector.Raycast();
+        hookedHighlight = target.HookCollider != null
+            ? target.HookCollider.GetComponentInParent<GrappleHighlight>()
+            : null;
+
         if (target.HitPoint == null)
             target.HitPoint = (Vector2)transform.position + detector.GetHookVec();
 
@@ -30,7 +35,7 @@ public class GrapplingHook : PlayerAbilityScript
 
         if (!target.HitHook)
         {
-            detector.SetHooked(false);
+            detector.SetHooked(null, false);
             return;
         }
 
@@ -50,7 +55,7 @@ public class GrapplingHook : PlayerAbilityScript
         prb.rotation = 0;
         prb.freezeRotation = true;
         playerDistanceJoint.enabled = false;
-        detector.SetHooked(false);
+        detector.SetHooked(null, false);
     }
 
     void Update()
@@ -59,7 +64,7 @@ public class GrapplingHook : PlayerAbilityScript
         if (target.HitPoint != null && target.HitHook)
         {
             lineRenderer.SetPosition(1, target.HitPoint.Value);
-            detector.SetHooked(true);
+            detector.SetHooked(hookedHighlight, true);
             float currentDist = Vector2.Distance(transform.position, target.HitPoint.Value);
             if (currentDist < playerDistanceJoint.distance)
                 playerDistanceJoint.distance = currentDist;
@@ -67,7 +72,7 @@ public class GrapplingHook : PlayerAbilityScript
         else
         {
             lineRenderer.SetPosition(1, (Vector2)transform.position + detector.GetHookVec());
-            detector.SetHooked(false);
+            detector.SetHooked(null, false);
         }
     }
 }
