@@ -74,7 +74,7 @@ ScriptedImporter:
   previousAsepriteImporterSettings:
     fileImportMode: 1
     importHiddenLayers: 0
-    layerImportMode: 1
+    layerImportMode: 0
     defaultPivotSpace: 0
     defaultPivotAlignment: 7
     customPivotPosition: {x: 0.5, y: 0.5}
@@ -87,7 +87,7 @@ ScriptedImporter:
   asepriteImporterSettings:
     fileImportMode: 1
     importHiddenLayers: 0
-    layerImportMode: 1
+    layerImportMode: 0
     defaultPivotSpace: 0
     defaultPivotAlignment: 7
     customPivotPosition: {x: 0.5, y: 0.5}
@@ -98,7 +98,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 639086277597543757
+  platformSettingsDirtyTick: 639086655876604408
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -123,7 +123,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: wooden_sign
+  - name: bg
     originalName: 
     pivot: {x: 0.53333336, y: 0}
     alignment: 9
@@ -134,8 +134,8 @@ ScriptedImporter:
       x: 4
       y: 4
       width: 30
-      height: 30
-    spriteID: 8b81b3e9dfc14e848a9772d13a89fc02
+      height: 31
+    spriteID: 8941f9e6ed7b4f0479c3df3c122a6488
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -144,29 +144,161 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
+  - name: cross
+    originalName: 
+    pivot: {x: 0.6666667, y: -1.0909091}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 42
+      y: 22
+      width: 12
+      height: 11
+    spriteID: 46305c6a91d372f459b1fddd723c7255
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 42, y: 22}
+  - name: rightarrow
+    originalName: 
+    pivot: {x: 0.5625, y: -1.3000001}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 43
+      width: 16
+      height: 10
+    spriteID: 514d6df96d8ec764294d77657962a75f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 43}
+  - name: leftarrow
+    originalName: 
+    pivot: {x: 0.625, y: -1.3000001}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 42
+      y: 4
+      width: 16
+      height: 10
+    spriteID: 799acb9279b959f4f82d1dd9589e679f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 42, y: 4}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
     uuid:
-      value0: 1817728388
+      value0: 1853145425
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: wooden_sign
-    layerFlags: 0
+    name: bg
+    layerFlags: 3
     layerType: 0
     blendMode: 0
     cells:
-    - name: wooden_sign
+    - name: bg
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
         width: 30
-        height: 30
-      spriteId: 8b81b3e9dfc14e848a9772d13a89fc02
+        height: 31
+      spriteId: 8941f9e6ed7b4f0479c3df3c122a6488
+    linkedCells: []
+    parentIndex: -1
+  - layerIndex: 3
+    uuid:
+      value0: 3060479438
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: 0
+    name: cross
+    layerFlags: 3
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: cross
+      frameIndex: 0
+      additiveSortOrder: 0
+      cellRect:
+        x: 8
+        y: 12
+        width: 12
+        height: 11
+      spriteId: 46305c6a91d372f459b1fddd723c7255
+    linkedCells: []
+    parentIndex: -1
+  - layerIndex: 1
+    uuid:
+      value0: 3234480889
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: 0
+    name: rightarrow
+    layerFlags: 3
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: rightarrow
+      frameIndex: 0
+      additiveSortOrder: 0
+      cellRect:
+        x: 7
+        y: 13
+        width: 16
+        height: 10
+      spriteId: 514d6df96d8ec764294d77657962a75f
+    linkedCells: []
+    parentIndex: -1
+  - layerIndex: 2
+    uuid:
+      value0: 1494410936
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: 0
+    name: leftarrow
+    layerFlags: 3
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: leftarrow
+      frameIndex: 0
+      additiveSortOrder: 0
+      cellRect:
+        x: 6
+        y: 13
+        width: 16
+        height: 10
+      spriteId: 799acb9279b959f4f82d1dd9589e679f
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -281,5 +413,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 32, y: 32}
+  canvasSize: {x: 32, y: 34}
   previousTextureSize: {x: 64, y: 64}
