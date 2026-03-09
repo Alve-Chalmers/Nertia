@@ -21,8 +21,6 @@ public class Wheel : PlayerAbilityScript
 
     Vector2 currentOffsetDirection;
 
-    float lastAngularVelocity = 0f;
-
     protected override void OnEnable()
     {
         base.OnEnable();
