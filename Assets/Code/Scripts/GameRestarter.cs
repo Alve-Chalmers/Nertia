@@ -7,6 +7,7 @@ public class GameRestarter : MonoBehaviour
     [SerializeField] InputActionReference restartAction;
     [SerializeField] SOEventString gotoScene;
     [SerializeField] SOEventBool pause;
+    [SerializeField] SOEvent freezePlayer;
     [SerializeField] SceneField sceneToGoTo;
 
     void OnEnable()
@@ -17,6 +18,7 @@ public class GameRestarter : MonoBehaviour
     private void Restart(InputAction.CallbackContext _)
     {
         pause.Raise(false);
+        freezePlayer.Raise();
         gotoScene.Raise(sceneToGoTo);
     }
 }
