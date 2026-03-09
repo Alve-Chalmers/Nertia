@@ -6,7 +6,7 @@ public class HighscorePlayerStatsText : MonoBehaviour
     [SerializeField] Text text;
     [SerializeField] PlaythroughStats highScoreStats;
 
-    void OnEnable()
+    void Start()
     {
         Debug.Log(highScoreStats.time);
         if (highScoreStats.time < 0) // has not stored highscore before
