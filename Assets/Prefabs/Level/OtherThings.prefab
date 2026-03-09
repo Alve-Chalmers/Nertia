@@ -46,6 +46,57 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   setPause: {fileID: 11400000, guid: bb5d389dae598f64eb6ed5cd07a1fcc9, type: 2}
   fadeDuration: 0.3
+--- !u!1 &2674558403096842546
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8966503238373180657}
+  - component: {fileID: 7403143081257356104}
+  m_Layer: 0
+  m_Name: GameRestarter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8966503238373180657
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2674558403096842546}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5123605218559556089}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7403143081257356104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2674558403096842546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0432ef9908ef384fa4aa292d52850c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restartAction: {fileID: 7576967436965644012, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  gotoScene: {fileID: 11400000, guid: c3249f1ab187a054fb68f0c7ea37ec30, type: 2}
+  pause: {fileID: 11400000, guid: bb5d389dae598f64eb6ed5cd07a1fcc9, type: 2}
+  freezePlayer: {fileID: 11400000, guid: 9078bc9adea871d49adc8a8443fdf8e2, type: 2}
+  sceneToGoTo:
+    sceneAsset: {fileID: 102900000, guid: 3193bfcef1917fcfa8b8898b751d0f63, type: 3}
+    sceneName: Forest1
 --- !u!1 &3828931262541849776
 GameObject:
   m_ObjectHideFlags: 0
@@ -80,6 +131,7 @@ Transform:
   - {fileID: 6054609465828832196}
   - {fileID: 1952506916752580279}
   - {fileID: 2783250937318555693}
+  - {fileID: 8966503238373180657}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4155834056890188801

@@ -71,8 +71,11 @@ public class PlayerInput : MonoBehaviour
 
         if (ctx.action != null && abilityDict.TryGetValue(ctx.action.name, out var abilityType))
         {
-            if (unlockedAbilities.Abilities.Contains(abilityType))
-                useAbility.Raise(abilityType);
+            if (!unlockedAbilities.Abilities.Contains(abilityType))
+                return;
+            if (abilityType == PlayerAbilityType.SELF_DESTRUCT && Keyboard.current.shiftKey.isPressed)
+                return;
+            useAbility.Raise(abilityType);
         }
     }
 
