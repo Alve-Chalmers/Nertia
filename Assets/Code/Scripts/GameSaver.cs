@@ -10,5 +10,6 @@ public class GameSaver : MonoBehaviour
         PlayerPrefs.SetString("LevelToStartAt", SceneManager.GetActiveScene().name);
         PlayerPrefs.SetFloat("PlaythroughStats_time", playthroughStats.time);
         PlayerPrefs.SetInt("PlaythroughStats_deaths", playthroughStats.deaths);
+        PlayerPrefs.Save();
     }
 }
