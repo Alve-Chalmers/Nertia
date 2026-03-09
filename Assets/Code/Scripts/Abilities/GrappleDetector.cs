@@ -111,17 +111,17 @@ public class GrappleDetector : MonoBehaviour
         Gizmos.DrawLine(playerInfo.Position, playerInfo.Position + dir.normalized * castDistance);
     }
 
-    public void SetHooked(bool hooked)
+    public void SetHooked(GrappleHighlight hookedHighlight, bool hooked)
     {
         if (hooked)
         {
-            if (currentHighlight == null)
+            if (hookedHighlight == null)
                 return;
 
-            if (currentlyHookedHighlight != null && currentlyHookedHighlight != currentHighlight)
+            if (currentlyHookedHighlight != null && currentlyHookedHighlight != hookedHighlight)
                 currentlyHookedHighlight.SetHooked(false);
 
-            currentlyHookedHighlight = currentHighlight;
+            currentlyHookedHighlight = hookedHighlight;
             currentlyHookedHighlight.SetHooked(true);
             return;
         }
