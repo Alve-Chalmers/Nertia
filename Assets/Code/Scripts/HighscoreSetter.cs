@@ -10,10 +10,6 @@ public class HighscoreSetter : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("stats.time");
-        Debug.Log(stats.time);
-        Debug.Log("highScoreStats.time");
-        Debug.Log(highScoreStats.time);
         if (highScoreStats.time < 0)
         {
             highScoreStats.time = stats.time;

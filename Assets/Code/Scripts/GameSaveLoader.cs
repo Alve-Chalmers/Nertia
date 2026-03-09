@@ -31,10 +31,8 @@ public class GameSaveLoader : MonoBehaviour
         playthroughStats.time = PlayerPrefs.GetFloat("PlaythroughStats_time", 0);
         playthroughStats.deaths = PlayerPrefs.GetInt("PlaythroughStats_deaths", 0);
 
-        Debug.Log(highScorePlaythroughStats.time);
         highScorePlaythroughStats.time = PlayerPrefs.GetFloat("HighScorePlaythroughStats_time", -1);
         highScorePlaythroughStats.deaths = PlayerPrefs.GetInt("HighScorePlaythroughStats_deaths", -1);
-        Debug.Log(highScorePlaythroughStats.time);
     }
 
     void OnEnable()
@@ -49,7 +47,7 @@ public class GameSaveLoader : MonoBehaviour
         continueGame.action.performed -= OnContinueGame;
     }
 
-    void OnNewGame(InputAction.CallbackContext _) => SceneManager.LoadScene(defaultStartingLevel);
+    void OnNewGame(InputAction.CallbackContext _) => gotoScene.Raise(defaultStartingLevel);
 
     void OnContinueGame(InputAction.CallbackContext _)
     {
