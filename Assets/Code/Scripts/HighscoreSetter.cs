@@ -10,10 +10,9 @@ public class HighscoreSetter : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("stats.time");
-        Debug.Log(stats.time);
-        Debug.Log("highScoreStats.time");
-        Debug.Log(highScoreStats.time);
+        highScoreStats.time = PlayerPrefs.GetFloat("HighScorePlaythroughStats_time", -1);
+        highScoreStats.deaths = PlayerPrefs.GetInt("HighScorePlaythroughStats_deaths", -1);
+
         if (highScoreStats.time < 0)
         {
             highScoreStats.time = stats.time;
@@ -29,5 +28,6 @@ public class HighscoreSetter : MonoBehaviour
 
         PlayerPrefs.SetFloat("HighScorePlaythroughStats_time", highScoreStats.time);
         PlayerPrefs.SetInt("HighScorePlaythroughStats_deaths", highScoreStats.deaths);
+        PlayerPrefs.Save();
     }
 }
