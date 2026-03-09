@@ -2,9 +2,9 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class GameRestarter : MonoBehaviour
+public class GotoSceneInputListener : MonoBehaviour
 {
-    [SerializeField] InputActionReference restartAction;
+    [SerializeField] InputActionReference inputAction;
     [SerializeField] SOEventString gotoScene;
     [SerializeField] SOEventBool pause;
     [SerializeField] SOEvent freezePlayer;
@@ -12,7 +12,12 @@ public class GameRestarter : MonoBehaviour
 
     void OnEnable()
     {
-        restartAction.action.performed += Restart;
+        inputAction.action.performed += Restart;
+    }
+
+    void OnDisable()
+    {
+        inputAction.action.performed -= Restart;
     }
 
     private void Restart(InputAction.CallbackContext _)

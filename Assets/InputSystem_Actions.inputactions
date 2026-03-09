@@ -106,9 +106,27 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "RestartFromBeginning",
+                    "name": "GotoMenu",
                     "type": "Button",
                     "id": "fd8302d0-c4e8-470b-8282-80abebc5618b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "NewGame",
+                    "type": "Button",
+                    "id": "743928aa-2e30-41db-b500-8699eab262e6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ContinueGame",
+                    "type": "Button",
+                    "id": "b786c618-d8bc-49c5-813c-ec7d7bda5667",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -288,7 +306,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RestartFromBeginning",
+                    "action": "GotoMenu",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -299,7 +317,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "RestartFromBeginning",
+                    "action": "GotoMenu",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -310,9 +328,31 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "RestartFromBeginning",
+                    "action": "GotoMenu",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "db6c70ab-20b4-481b-9a49-b0897bfe7aff",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NewGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "440265ad-6825-492a-8df3-3322317cb0a8",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ContinueGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
