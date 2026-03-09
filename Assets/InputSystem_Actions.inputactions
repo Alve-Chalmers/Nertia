@@ -7,6 +7,15 @@
             "id": "df70fa95-8a34-4494-b137-73ab6b9c7d37",
             "actions": [
                 {
+                    "name": "RestartFromBeginning",
+                    "type": "Button",
+                    "id": "fd8302d0-c4e8-470b-8282-80abebc5618b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "SelfDestruct",
                     "type": "Button",
                     "id": "1425ecfc-4e4b-401b-a454-2f8762192fee",
@@ -269,6 +278,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "PrevLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "One Modifier",
+                    "id": "293d38ce-17fd-496d-acaf-c259e7be92d3",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RestartFromBeginning",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "adbd4e1a-08e2-41c2-aa0f-747837614239",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "RestartFromBeginning",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "bcaa4031-7a7e-4b8d-a31b-b443832172d7",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "RestartFromBeginning",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }
