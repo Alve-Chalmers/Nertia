@@ -8,7 +8,6 @@ public class AbilityIcon : MonoBehaviour
         for (int i = 0; i < transform.childCount; i++)
         {
             Transform child = transform.GetChild(i);
-            Debug.Log(child.name + " " + targetName);
             child.gameObject.SetActive(child.name == targetName);
         }
     }
