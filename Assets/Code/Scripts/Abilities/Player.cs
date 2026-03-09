@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] SOEventString gotoScene;
     [SerializeField] PlaythroughStats playthroughStats;
     [SerializeField] Animator playerAnimator;
+    [SerializeField] AudioSource deathAudioSource;
 
     void Awake()
     {
@@ -59,6 +60,7 @@ public class Player : MonoBehaviour
     void OnPlayerDeathRequested() {
         playerAnimator.Play("death");
         freezePlayerInPlace.Raise();
+        deathAudioSource.Play();
         StartCoroutine(GotoSceneAfterDelay());
         playthroughStats.deaths += 1;
     }
