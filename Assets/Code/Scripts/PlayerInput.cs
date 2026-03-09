@@ -73,7 +73,7 @@ public class PlayerInput : MonoBehaviour
         {
             if (!unlockedAbilities.Abilities.Contains(abilityType))
                 return;
-            if (abilityType == PlayerAbilityType.SELF_DESTRUCT && Keyboard.current.ctrlKey.isPressed)
+            if (abilityType == PlayerAbilityType.SELF_DESTRUCT && Keyboard.current.shiftKey.isPressed)
                 return;
             useAbility.Raise(abilityType);
         }
